@@ -1,56 +1,67 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
       "type": "nl-hero-carousel",
-      "settings": {
-        "aria_label": "Featured collections",
-        "first_heading_h1": true,
-        "panel_background": "",
-        "autoplay": false,
-        "autoplay_speed": 6
-      },
       "blocks": {
         "slide-1": {
           "type": "slide",
           "settings": {
             "label": "New · Autumn edit",
-            "marker_color": "#B9704D",
+            "marker_color": "#b9704d",
             "heading": "Warm shades for slower days",
             "text": "Clay, cocoa and fig. Six new gel colours made to wear quietly for up to three weeks.",
             "button_label": "Shop now",
             "button_link": "shopify://collections/gel-polish",
-            "art": "image"
+            "art": "image",
+            "image": "shopify://shop_images/photo_2_2026-10-20_23-02-17.jpg",
+            "image_alt": "Hand resting on white linen, nails in a soft nude gel",
+            "shade_1": "#ede6dd",
+            "shade_2": "#d8c0a3",
+            "shade_3": "#b98680",
+            "shade_4": "#1c1716"
           }
         },
         "slide-2": {
           "type": "slide",
           "settings": {
             "label": "New · Builder Gel in a Bottle",
-            "marker_color": "#B9704D",
+            "marker_color": "#b9704d",
             "heading": "Strength you can brush on",
             "text": "A self-levelling builder that adds structure to natural nails. No pots, no files, no fuss.",
             "button_label": "Shop now",
             "button_link": "shopify://collections/builder-gel",
             "art": "bottles",
-            "shade_1": "#EDE6DD",
-            "shade_2": "#D8C0A3",
-            "shade_3": "#B98680"
+            "image_alt": "Hand resting on white linen, nails in a soft nude gel",
+            "shade_1": "#ede6dd",
+            "shade_2": "#d8c0a3",
+            "shade_3": "#b98680",
+            "shade_4": "#1c1716"
           }
         },
         "slide-3": {
           "type": "slide",
           "settings": {
             "label": "New · Gift sets",
-            "marker_color": "#B9704D",
+            "marker_color": "#b9704d",
             "heading": "Gifting, quietly done",
             "text": "Four curated shades in a recycled-card box, ready to give.",
             "button_label": "Shop now",
             "button_link": "shopify://collections/gift-sets",
             "art": "swatches",
-            "shade_1": "#5E3B2E",
-            "shade_2": "#B98680",
-            "shade_3": "#EDE6DD",
-            "shade_4": "#1C1716"
+            "image_alt": "Hand resting on white linen, nails in a soft nude gel",
+            "shade_1": "#5e3b2e",
+            "shade_2": "#b98680",
+            "shade_3": "#ede6dd",
+            "shade_4": "#1c1716"
           }
         }
       },
@@ -58,15 +69,17 @@
         "slide-1",
         "slide-2",
         "slide-3"
-      ]
+      ],
+      "settings": {
+        "aria_label": "Featured collections",
+        "first_heading_h1": true,
+        "panel_background": "",
+        "autoplay": false,
+        "autoplay_speed": 6
+      }
     },
     "promo": {
       "type": "nl-promo-tiles",
-      "settings": {
-        "aria_label": "Shop by category",
-        "padding_top": 16,
-        "padding_bottom": 0
-      },
       "blocks": {
         "tile-1": {
           "type": "tile",
@@ -74,12 +87,15 @@
             "link": "shopify://collections/gel-polish",
             "label": "Bestsellers",
             "show_marker": false,
+            "marker_color": "#8a8666",
             "heading": "Bestselling gel polish",
             "link_label": "Shop",
             "art": "bottles",
-            "shade_1": "#5E3B2E",
-            "shade_2": "#1C1716",
-            "shade_3": "#B98680"
+            "shade_1": "#5e3b2e",
+            "shade_2": "#1c1716",
+            "shade_3": "#b98680",
+            "badge": "",
+            "badge_color": "#8a8666"
           }
         },
         "tile-2": {
@@ -88,10 +104,15 @@
             "link": "shopify://collections/nail-care",
             "label": "Nail care",
             "show_marker": false,
+            "marker_color": "#8a8666",
             "heading": "Oils, serums and strengtheners",
             "link_label": "Shop",
             "art": "dropper",
-            "shade_1": "#EDE6DD"
+            "shade_1": "#ede6dd",
+            "shade_2": "#1c1716",
+            "shade_3": "#b98680",
+            "badge": "",
+            "badge_color": "#8a8666"
           }
         },
         "tile-3": {
@@ -100,12 +121,16 @@
             "link": "",
             "label": "NAILOGY Academy",
             "show_marker": true,
-            "marker_color": "#8A8666",
+            "marker_color": "#8a8666",
             "heading": "Join the Academy",
             "link_label": "Find out more",
             "art": "image",
+            "image": "shopify://shop_images/photo_3_2026-10-20_23-02-17.jpg",
+            "shade_1": "#5e3b2e",
+            "shade_2": "#1c1716",
+            "shade_3": "#b98680",
             "badge": "Coming soon",
-            "badge_color": "#8A8666"
+            "badge_color": "#8a8666"
           }
         }
       },
@@ -113,16 +138,15 @@
         "tile-1",
         "tile-2",
         "tile-3"
-      ]
+      ],
+      "settings": {
+        "aria_label": "Shop by category",
+        "padding_top": 16,
+        "padding_bottom": 0
+      }
     },
     "benefits": {
       "type": "nl-benefits",
-      "settings": {
-        "aria_label": "Why NAILOGY",
-        "icon_color": "",
-        "padding_top": 56,
-        "padding_bottom": 8
-      },
       "blocks": {
         "benefit-1": {
           "type": "item",
@@ -162,7 +186,13 @@
         "benefit-2",
         "benefit-3",
         "benefit-4"
-      ]
+      ],
+      "settings": {
+        "aria_label": "Why NAILOGY",
+        "icon_color": "",
+        "padding_top": 56,
+        "padding_bottom": 8
+      }
     },
     "statement": {
       "type": "nl-brand-statement",
@@ -193,56 +223,62 @@
     },
     "panels": {
       "type": "nl-feature-panels",
-      "settings": {
-        "aria_label": "Featured",
-        "padding_top": 0,
-        "padding_bottom": 56
-      },
       "blocks": {
         "panel-1": {
           "type": "panel",
           "settings": {
+            "product": "",
             "link": "shopify://collections/builder-gel",
             "label": "Bundle · Save 15%",
             "show_marker": true,
-            "marker_color": "#B9704D",
+            "marker_color": "#b9704d",
             "heading": "The Builder Gel Kit",
             "text": "Base, builder and top coat in one box. Everything for a strong, natural-looking set.",
             "link_label": "Shop now",
             "art": "bottles",
-            "art_background": "#D8C0A3",
-            "shade_1": "#EDE6DD",
-            "shade_2": "#B98680",
-            "shade_3": "#F7F4EE"
+            "art_background": "#d8c0a3",
+            "shade_1": "#ede6dd",
+            "shade_2": "#b98680",
+            "shade_3": "#f7f4ee",
+            "shade_4": "#1c1716"
           }
         },
         "panel-2": {
           "type": "panel",
           "settings": {
+            "product": "",
             "link": "shopify://collections/gift-sets",
             "label": "Gift set",
             "show_marker": false,
+            "marker_color": "#b9704d",
             "heading": "The Discovery Set",
             "text": "Four mini gel colours to try before you choose a favourite. Beautifully boxed.",
             "link_label": "Shop now",
             "art": "swatches",
-            "shade_1": "#5E3B2E",
-            "shade_2": "#B98680",
-            "shade_3": "#C08A6B",
-            "shade_4": "#1C1716"
+            "art_background": "#d8c0a3",
+            "shade_1": "#5e3b2e",
+            "shade_2": "#b98680",
+            "shade_3": "#c08a6b",
+            "shade_4": "#1c1716"
           }
         },
         "panel-3": {
           "type": "panel",
           "settings": {
+            "product": "",
             "link": "shopify://collections/nail-care",
             "label": "Care",
             "show_marker": true,
-            "marker_color": "#8A8666",
+            "marker_color": "#8a8666",
             "heading": "The Care Ritual",
             "text": "Cuticle oil, nourishing serum and a gentle remover for the days between sets.",
             "link_label": "Shop now",
-            "art": "image"
+            "art": "image",
+            "art_background": "#d8c0a3",
+            "shade_1": "#ede6dd",
+            "shade_2": "#b98680",
+            "shade_3": "#f7f4ee",
+            "shade_4": "#1c1716"
           }
         }
       },
@@ -250,23 +286,21 @@
         "panel-1",
         "panel-2",
         "panel-3"
-      ]
+      ],
+      "settings": {
+        "aria_label": "Featured",
+        "padding_top": 0,
+        "padding_bottom": 56
+      }
     },
     "routine": {
       "type": "nl-routine",
-      "settings": {
-        "label": "Four steps",
-        "heading": "Your complete routine",
-        "link_label": "Shop the routine",
-        "link": "shopify://collections/all",
-        "background": ""
-      },
       "blocks": {
         "step-1": {
           "type": "step",
           "settings": {
             "number": "",
-            "shade": "#E4DCCB",
+            "shade": "#e4dccb",
             "title": "Prep",
             "text": "Push back, buff and cleanse for a clean surface.",
             "link_label": "Shop prep",
@@ -277,7 +311,7 @@
           "type": "step",
           "settings": {
             "number": "",
-            "shade": "#D8C0A3",
+            "shade": "#d8c0a3",
             "title": "Base",
             "text": "A thin rubber base for grip and a smooth finish.",
             "link_label": "Shop base coats",
@@ -288,7 +322,7 @@
           "type": "step",
           "settings": {
             "number": "",
-            "shade": "#B98680",
+            "shade": "#b98680",
             "title": "Colour",
             "text": "Two slim coats of gel colour, cured between each.",
             "link_label": "Shop gel polish",
@@ -299,7 +333,7 @@
           "type": "step",
           "settings": {
             "number": "",
-            "shade": "#5E3B2E",
+            "shade": "#5e3b2e",
             "title": "Top coat & care",
             "text": "Seal with top coat, then oil daily.",
             "link_label": "Shop top coats",
@@ -312,24 +346,17 @@
         "step-2",
         "step-3",
         "step-4"
-      ]
+      ],
+      "settings": {
+        "label": "Four steps",
+        "heading": "Your complete routine",
+        "link_label": "Shop the routine",
+        "link": "shopify://collections/all",
+        "background": ""
+      }
     },
     "academy": {
       "type": "nl-academy",
-      "settings": {
-        "media_label": "Preview · 2:14",
-        "badge": "Coming soon",
-        "badge_color": "#8A8666",
-        "label": "NAILOGY Academy",
-        "heading": "Learn from the bench",
-        "text": "<p>Short video courses taught by working nail technicians. Watch at home, at your pace, with lifetime access in your NAILOGY account.</p>",
-        "marker_color": "#8A8666",
-        "show_form": true,
-        "form_tags": "newsletter, academy-waitlist",
-        "form_placeholder": "Your email address",
-        "form_button": "Get early access",
-        "form_success": "You’re on the list. We’ll email you when doors open."
-      },
       "blocks": {
         "course-1": {
           "type": "course",
@@ -357,20 +384,27 @@
         "course-1",
         "course-2",
         "course-3"
-      ]
+      ],
+      "settings": {
+        "image_alt": "Preview still from a nail art lesson",
+        "video_url": "",
+        "media_label": "Preview · 2:14",
+        "badge": "Coming soon",
+        "badge_color": "#8a8666",
+        "label": "NAILOGY Academy",
+        "heading": "Learn from the bench",
+        "text": "<p>Short video courses taught by working nail technicians. Watch at home, at your pace, with lifetime access in your NAILOGY account.</p>",
+        "marker_color": "#8a8666",
+        "background": "",
+        "show_form": true,
+        "form_tags": "newsletter, academy-waitlist",
+        "form_placeholder": "Your email address",
+        "form_button": "Get early access",
+        "form_success": "You’re on the list. We’ll email you when doors open."
+      }
     },
     "reviews": {
       "type": "nl-reviews",
-      "settings": {
-        "label": "Reviews",
-        "heading": "Loved at home",
-        "show_summary": true,
-        "rating": "4.8",
-        "review_count": "[review count]",
-        "note": "Sample reviews for layout. Live reviews come from your reviews app.",
-        "star_color": "#B9704D",
-        "background": ""
-      },
       "blocks": {
         "review-1": {
           "type": "review",
@@ -407,57 +441,73 @@
         "review-1",
         "review-2",
         "review-3"
-      ]
+      ],
+      "settings": {
+        "label": "Reviews",
+        "heading": "Loved at home",
+        "show_summary": true,
+        "rating": "4.8",
+        "review_count": "[review count]",
+        "note": "Sample reviews for layout. Live reviews come from your reviews app.",
+        "star_color": "#b9704d",
+        "background": ""
+      }
     },
     "instagram": {
       "type": "nl-instagram",
-      "settings": {
-        "heading": "On the gram",
-        "handle": "@nailogy",
-        "link": ""
-      },
       "blocks": {
         "ig-1": {
           "type": "tile",
           "settings": {
+            "color": "#e4dccb",
+            "link": "",
             "sample": "nl-demo-hand",
-            "color": "#E4DCCB"
+            "sample_position": "50% 50%"
           }
         },
         "ig-2": {
           "type": "tile",
           "settings": {
+            "color": "#b98680",
+            "link": "",
             "sample": "none",
-            "color": "#B98680"
+            "sample_position": "50% 50%"
           }
         },
         "ig-3": {
           "type": "tile",
           "settings": {
+            "color": "#5e3b2e",
+            "link": "",
             "sample": "none",
-            "color": "#5E3B2E"
+            "sample_position": "50% 50%"
           }
         },
         "ig-4": {
           "type": "tile",
           "settings": {
+            "color": "#e4dccb",
+            "link": "",
             "sample": "nl-demo-fur",
-            "color": "#E4DCCB"
+            "sample_position": "50% 50%"
           }
         },
         "ig-5": {
           "type": "tile",
           "settings": {
+            "color": "#e4dccb",
+            "link": "",
             "sample": "nl-demo-hand",
-            "sample_position": "20% 80%",
-            "color": "#E4DCCB"
+            "sample_position": "20% 80%"
           }
         },
         "ig-6": {
           "type": "tile",
           "settings": {
+            "color": "#c08a6b",
+            "link": "",
             "sample": "none",
-            "color": "#C08A6B"
+            "sample_position": "50% 50%"
           }
         }
       },
@@ -468,16 +518,15 @@
         "ig-4",
         "ig-5",
         "ig-6"
-      ]
+      ],
+      "settings": {
+        "heading": "On the gram",
+        "handle": "@nailogy",
+        "link": ""
+      }
     },
     "service": {
       "type": "nl-service-strip",
-      "settings": {
-        "aria_label": "Our promises",
-        "icon_color": "",
-        "padding_top": 0,
-        "padding_bottom": 0
-      },
       "blocks": {
         "service-1": {
           "type": "item",
@@ -517,7 +566,13 @@
         "service-2",
         "service-3",
         "service-4"
-      ]
+      ],
+      "settings": {
+        "aria_label": "Our promises",
+        "icon_color": "",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
     },
     "newsletter": {
       "type": "nl-newsletter",
