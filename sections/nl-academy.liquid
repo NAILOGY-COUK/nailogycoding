@@ -1,0 +1,271 @@
+{%- liquid
+  assign heading_id = 'NlAcademyHeading-' | append: section.id
+  assign has_video = false
+  if section.settings.video != blank or section.settings.video_url != blank
+    assign has_video = true
+  endif
+  assign bg = section.settings.background | default: settings.nl_color_walnut
+-%}
+<div class="nl-s nl-dark nl-academy" style="background: {{ bg }};">
+  <div class="nl-wrap nl-sec">
+    <div class="nl-split">
+      <deferred-media class="nl-academy__media">
+        {%- if section.settings.image != blank -%}
+          {{
+            section.settings.image
+            | image_url: width: 1600
+            | image_tag:
+              class: 'nl-art__img',
+              widths: '500, 750, 1000, 1300, 1600',
+              sizes: '(min-width: 900px) 58vw, 100vw',
+              loading: 'lazy'
+          }}
+        {%- else -%}
+          <img
+            class="nl-art__img"
+            src="{{ 'nl-demo-fur.jpg' | asset_url }}"
+            alt="{{ section.settings.image_alt | escape }}"
+            width="739"
+            height="415"
+            loading="lazy"
+          >
+        {%- endif -%}
+
+        {%- if has_video -%}
+          <button type="button" id="Deferred-Poster-{{ section.id }}" class="nl-academy__play" aria-label="{{ 'nailogy.academy.play' | t }}">
+            {%- render 'nl-icon', icon: 'play' -%}
+          </button>
+          <template>
+            {%- if section.settings.video != blank -%}
+              {{
+                section.settings.video
+                | video_tag: autoplay: true, controls: true, playsinline: true, class: 'nl-academy__video'
+              }}
+            {%- elsif section.settings.video_url.type == 'youtube' -%}
+              <iframe
+                class="nl-academy__video"
+                src="https://www.youtube.com/embed/{{ section.settings.video_url.id }}?autoplay=1&rel=0"
+                title="{{ section.settings.heading | escape }}"
+                allow="autoplay; encrypted-media; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            {%- else -%}
+              <iframe
+                class="nl-academy__video"
+                src="https://player.vimeo.com/video/{{ section.settings.video_url.id }}?autoplay=1"
+                title="{{ section.settings.heading | escape }}"
+                allow="autoplay; fullscreen; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            {%- endif -%}
+          </template>
+        {%- else -%}
+          <span class="nl-academy__play" aria-hidden="true">{%- render 'nl-icon', icon: 'play' -%}</span>
+        {%- endif -%}
+
+        {%- if section.settings.media_label != blank -%}
+          <span class="nl-lbl nl-academy__tag">{{ section.settings.media_label | escape }}</span>
+        {%- endif -%}
+      </deferred-media>
+
+      <div class="nl-academy__copy">
+        {%- if section.settings.badge != blank -%}
+          <span class="nl-badge-soon nl-academy__badge" style="background: {{ section.settings.badge_color }};">
+            {{- section.settings.badge | escape -}}
+          </span>
+        {%- endif -%}
+        {%- if section.settings.label != blank -%}
+          <span class="nl-lbl">{{ section.settings.label | escape }}</span>
+        {%- endif -%}
+        <h2 id="{{ heading_id }}" class="nl-h nl-academy__heading">{{ section.settings.heading | escape }}</h2>
+        {%- if section.settings.text != blank -%}
+          <div class="nl-academy__text nl-rte">{{ section.settings.text }}</div>
+        {%- endif -%}
+
+        {%- if section.blocks.size > 0 -%}
+          <ul class="list-unstyled nl-academy__courses" role="list">
+            {%- for block in section.blocks -%}
+              <li class="nl-academy__course" {{ block.shopify_attributes }}>
+                <span class="nl-academy__course-title">
+                  <span class="nl-marker" style="background: {{ section.settings.marker_color }};" aria-hidden="true"></span>
+                  {{- block.settings.title | escape -}}
+                </span>
+                <span>{{ block.settings.meta | escape }}</span>
+              </li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+
+        {%- if section.settings.show_form -%}
+          <div class="nl-academy__form">
+            {%- assign form_id = 'NlAcademy-' | append: section.id -%}
+            {%- render 'nl-signup-form',
+              form_id: form_id,
+              tags: section.settings.form_tags,
+              placeholder: section.settings.form_placeholder,
+              button_label: section.settings.form_button,
+              button_class: 'nl-btn--light',
+              success_text: section.settings.form_success
+            -%}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "NL Academy teaser",
+  "tag": "section",
+  "class": "nl-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Media"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Preview image"
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Placeholder image description",
+      "default": "Preview still from a nail art lesson",
+      "info": "Only used for the sample image. Chosen images use their own alt text."
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Preview video",
+      "info": "Plays when the play button is pressed."
+    },
+    {
+      "type": "video_url",
+      "id": "video_url",
+      "label": "Or YouTube / Vimeo URL",
+      "accept": ["youtube", "vimeo"]
+    },
+    {
+      "type": "text",
+      "id": "media_label",
+      "label": "Media tag",
+      "default": "Preview · 2:14"
+    },
+    {
+      "type": "header",
+      "content": "Text"
+    },
+    {
+      "type": "text",
+      "id": "badge",
+      "label": "Badge",
+      "default": "Coming soon"
+    },
+    {
+      "type": "color",
+      "id": "badge_color",
+      "label": "Badge colour",
+      "default": "#8A8666"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label",
+      "default": "NAILOGY Academy"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Learn from the bench"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Short video courses taught by working nail technicians. Watch at home, at your pace, with lifetime access in your NAILOGY account.</p>"
+    },
+    {
+      "type": "color",
+      "id": "marker_color",
+      "label": "Course marker colour",
+      "default": "#8A8666"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background",
+      "info": "Leave empty to use Deep Walnut from the design tokens."
+    },
+    {
+      "type": "header",
+      "content": "Early access form"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_form",
+      "label": "Show early access form",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "form_tags",
+      "label": "Customer tags",
+      "default": "newsletter, academy-waitlist",
+      "info": "Sign-ups are saved as customers with these tags, so you can segment the waitlist in Shopify."
+    },
+    {
+      "type": "text",
+      "id": "form_placeholder",
+      "label": "Placeholder",
+      "default": "Your email address"
+    },
+    {
+      "type": "text",
+      "id": "form_button",
+      "label": "Button label",
+      "default": "Get early access"
+    },
+    {
+      "type": "text",
+      "id": "form_success",
+      "label": "Success message",
+      "default": "You’re on the list. We’ll email you when doors open."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "course",
+      "name": "Course",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Gel at home: the foundations"
+        },
+        {
+          "type": "text",
+          "id": "meta",
+          "label": "Details",
+          "default": "6 lessons"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "NL Academy teaser",
+      "blocks": [
+        { "type": "course" },
+        { "type": "course", "settings": { "title": "Builder gel and structure", "meta": "8 lessons" } },
+        { "type": "course", "settings": { "title": "Minimal nail art", "meta": "5 lessons" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

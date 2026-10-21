@@ -1,0 +1,549 @@
+{
+  "sections": {
+    "hero": {
+      "type": "nl-hero-carousel",
+      "settings": {
+        "aria_label": "Featured collections",
+        "first_heading_h1": true,
+        "panel_background": "",
+        "autoplay": false,
+        "autoplay_speed": 6
+      },
+      "blocks": {
+        "slide-1": {
+          "type": "slide",
+          "settings": {
+            "label": "New · Autumn edit",
+            "marker_color": "#B9704D",
+            "heading": "Warm shades for slower days",
+            "text": "Clay, cocoa and fig. Six new gel colours made to wear quietly for up to three weeks.",
+            "button_label": "Shop now",
+            "button_link": "shopify://collections/gel-polish",
+            "art": "image"
+          }
+        },
+        "slide-2": {
+          "type": "slide",
+          "settings": {
+            "label": "New · Builder Gel in a Bottle",
+            "marker_color": "#B9704D",
+            "heading": "Strength you can brush on",
+            "text": "A self-levelling builder that adds structure to natural nails. No pots, no files, no fuss.",
+            "button_label": "Shop now",
+            "button_link": "shopify://collections/builder-gel",
+            "art": "bottles",
+            "shade_1": "#EDE6DD",
+            "shade_2": "#D8C0A3",
+            "shade_3": "#B98680"
+          }
+        },
+        "slide-3": {
+          "type": "slide",
+          "settings": {
+            "label": "New · Gift sets",
+            "marker_color": "#B9704D",
+            "heading": "Gifting, quietly done",
+            "text": "Four curated shades in a recycled-card box, ready to give.",
+            "button_label": "Shop now",
+            "button_link": "shopify://collections/gift-sets",
+            "art": "swatches",
+            "shade_1": "#5E3B2E",
+            "shade_2": "#B98680",
+            "shade_3": "#EDE6DD",
+            "shade_4": "#1C1716"
+          }
+        }
+      },
+      "block_order": [
+        "slide-1",
+        "slide-2",
+        "slide-3"
+      ]
+    },
+    "promo": {
+      "type": "nl-promo-tiles",
+      "settings": {
+        "aria_label": "Shop by category",
+        "padding_top": 16,
+        "padding_bottom": 0
+      },
+      "blocks": {
+        "tile-1": {
+          "type": "tile",
+          "settings": {
+            "link": "shopify://collections/gel-polish",
+            "label": "Bestsellers",
+            "show_marker": false,
+            "heading": "Bestselling gel polish",
+            "link_label": "Shop",
+            "art": "bottles",
+            "shade_1": "#5E3B2E",
+            "shade_2": "#1C1716",
+            "shade_3": "#B98680"
+          }
+        },
+        "tile-2": {
+          "type": "tile",
+          "settings": {
+            "link": "shopify://collections/nail-care",
+            "label": "Nail care",
+            "show_marker": false,
+            "heading": "Oils, serums and strengtheners",
+            "link_label": "Shop",
+            "art": "dropper",
+            "shade_1": "#EDE6DD"
+          }
+        },
+        "tile-3": {
+          "type": "tile",
+          "settings": {
+            "link": "",
+            "label": "NAILOGY Academy",
+            "show_marker": true,
+            "marker_color": "#8A8666",
+            "heading": "Join the Academy",
+            "link_label": "Find out more",
+            "art": "image",
+            "badge": "Coming soon",
+            "badge_color": "#8A8666"
+          }
+        }
+      },
+      "block_order": [
+        "tile-1",
+        "tile-2",
+        "tile-3"
+      ]
+    },
+    "benefits": {
+      "type": "nl-benefits",
+      "settings": {
+        "aria_label": "Why NAILOGY",
+        "icon_color": "",
+        "padding_top": 56,
+        "padding_bottom": 8
+      },
+      "blocks": {
+        "benefit-1": {
+          "type": "item",
+          "settings": {
+            "icon": "leaf",
+            "title": "Vegan",
+            "text": "No animal-derived ingredients"
+          }
+        },
+        "benefit-2": {
+          "type": "item",
+          "settings": {
+            "icon": "clock",
+            "title": "Long-wear",
+            "text": "Up to 21 days of colour"
+          }
+        },
+        "benefit-3": {
+          "type": "item",
+          "settings": {
+            "icon": "shield",
+            "title": "HEMA-free",
+            "text": "Kinder to nails and skin"
+          }
+        },
+        "benefit-4": {
+          "type": "item",
+          "settings": {
+            "icon": "spark",
+            "title": "Salon-quality",
+            "text": "Professional formulas at home"
+          }
+        }
+      },
+      "block_order": [
+        "benefit-1",
+        "benefit-2",
+        "benefit-3",
+        "benefit-4"
+      ]
+    },
+    "statement": {
+      "type": "nl-brand-statement",
+      "settings": {
+        "label": "Our approach",
+        "heading": "Salon results, at your own pace",
+        "text": "<p>We make professional gel systems for the kitchen table as much as the salon chair. Considered formulas, honest shades and step-by-step guidance, so a manicure that lasts three weeks feels calm rather than complicated.</p>",
+        "link_label": "Read our story",
+        "link": "shopify://pages/about",
+        "alignment": "center"
+      }
+    },
+    "bestsellers": {
+      "type": "nl-product-carousel",
+      "settings": {
+        "label": "Gel polish",
+        "heading": "Bestselling shades",
+        "collection": "gel-polish",
+        "products_to_show": 8,
+        "view_all_label": "View all",
+        "view_all_link": "",
+        "quick_add": true,
+        "show_shade": true,
+        "show_video": true,
+        "padding_top": 0,
+        "padding_bottom": 56
+      }
+    },
+    "panels": {
+      "type": "nl-feature-panels",
+      "settings": {
+        "aria_label": "Featured",
+        "padding_top": 0,
+        "padding_bottom": 56
+      },
+      "blocks": {
+        "panel-1": {
+          "type": "panel",
+          "settings": {
+            "link": "shopify://collections/builder-gel",
+            "label": "Bundle · Save 15%",
+            "show_marker": true,
+            "marker_color": "#B9704D",
+            "heading": "The Builder Gel Kit",
+            "text": "Base, builder and top coat in one box. Everything for a strong, natural-looking set.",
+            "link_label": "Shop now",
+            "art": "bottles",
+            "art_background": "#D8C0A3",
+            "shade_1": "#EDE6DD",
+            "shade_2": "#B98680",
+            "shade_3": "#F7F4EE"
+          }
+        },
+        "panel-2": {
+          "type": "panel",
+          "settings": {
+            "link": "shopify://collections/gift-sets",
+            "label": "Gift set",
+            "show_marker": false,
+            "heading": "The Discovery Set",
+            "text": "Four mini gel colours to try before you choose a favourite. Beautifully boxed.",
+            "link_label": "Shop now",
+            "art": "swatches",
+            "shade_1": "#5E3B2E",
+            "shade_2": "#B98680",
+            "shade_3": "#C08A6B",
+            "shade_4": "#1C1716"
+          }
+        },
+        "panel-3": {
+          "type": "panel",
+          "settings": {
+            "link": "shopify://collections/nail-care",
+            "label": "Care",
+            "show_marker": true,
+            "marker_color": "#8A8666",
+            "heading": "The Care Ritual",
+            "text": "Cuticle oil, nourishing serum and a gentle remover for the days between sets.",
+            "link_label": "Shop now",
+            "art": "image"
+          }
+        }
+      },
+      "block_order": [
+        "panel-1",
+        "panel-2",
+        "panel-3"
+      ]
+    },
+    "routine": {
+      "type": "nl-routine",
+      "settings": {
+        "label": "Four steps",
+        "heading": "Your complete routine",
+        "link_label": "Shop the routine",
+        "link": "shopify://collections/all",
+        "background": ""
+      },
+      "blocks": {
+        "step-1": {
+          "type": "step",
+          "settings": {
+            "number": "",
+            "shade": "#E4DCCB",
+            "title": "Prep",
+            "text": "Push back, buff and cleanse for a clean surface.",
+            "link_label": "Shop prep",
+            "link": ""
+          }
+        },
+        "step-2": {
+          "type": "step",
+          "settings": {
+            "number": "",
+            "shade": "#D8C0A3",
+            "title": "Base",
+            "text": "A thin rubber base for grip and a smooth finish.",
+            "link_label": "Shop base coats",
+            "link": ""
+          }
+        },
+        "step-3": {
+          "type": "step",
+          "settings": {
+            "number": "",
+            "shade": "#B98680",
+            "title": "Colour",
+            "text": "Two slim coats of gel colour, cured between each.",
+            "link_label": "Shop gel polish",
+            "link": ""
+          }
+        },
+        "step-4": {
+          "type": "step",
+          "settings": {
+            "number": "",
+            "shade": "#5E3B2E",
+            "title": "Top coat & care",
+            "text": "Seal with top coat, then oil daily.",
+            "link_label": "Shop top coats",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "step-1",
+        "step-2",
+        "step-3",
+        "step-4"
+      ]
+    },
+    "academy": {
+      "type": "nl-academy",
+      "settings": {
+        "media_label": "Preview · 2:14",
+        "badge": "Coming soon",
+        "badge_color": "#8A8666",
+        "label": "NAILOGY Academy",
+        "heading": "Learn from the bench",
+        "text": "<p>Short video courses taught by working nail technicians. Watch at home, at your pace, with lifetime access in your NAILOGY account.</p>",
+        "marker_color": "#8A8666",
+        "show_form": true,
+        "form_tags": "newsletter, academy-waitlist",
+        "form_placeholder": "Your email address",
+        "form_button": "Get early access",
+        "form_success": "You’re on the list. We’ll email you when doors open."
+      },
+      "blocks": {
+        "course-1": {
+          "type": "course",
+          "settings": {
+            "title": "Gel at home: the foundations",
+            "meta": "6 lessons"
+          }
+        },
+        "course-2": {
+          "type": "course",
+          "settings": {
+            "title": "Builder gel and structure",
+            "meta": "8 lessons"
+          }
+        },
+        "course-3": {
+          "type": "course",
+          "settings": {
+            "title": "Minimal nail art",
+            "meta": "5 lessons"
+          }
+        }
+      },
+      "block_order": [
+        "course-1",
+        "course-2",
+        "course-3"
+      ]
+    },
+    "reviews": {
+      "type": "nl-reviews",
+      "settings": {
+        "label": "Reviews",
+        "heading": "Loved at home",
+        "show_summary": true,
+        "rating": "4.8",
+        "review_count": "[review count]",
+        "note": "Sample reviews for layout. Live reviews come from your reviews app.",
+        "star_color": "#B9704D",
+        "background": ""
+      },
+      "blocks": {
+        "review-1": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "quote": "Three weeks in and not a single chip. The colour is exactly as shown.",
+            "name": "Amelia",
+            "product": "Gel Colour in Cocoa",
+            "date": "12 October 2026"
+          }
+        },
+        "review-2": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "quote": "The builder gel levels itself. My nails finally feel strong again.",
+            "name": "Priya",
+            "product": "Builder Gel in a Bottle, Milk",
+            "date": "3 October 2026"
+          }
+        },
+        "review-3": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "quote": "Calm packaging, clear instructions and the oil smells lovely.",
+            "name": "Hannah",
+            "product": "The Care Ritual",
+            "date": "28 September 2026"
+          }
+        }
+      },
+      "block_order": [
+        "review-1",
+        "review-2",
+        "review-3"
+      ]
+    },
+    "instagram": {
+      "type": "nl-instagram",
+      "settings": {
+        "heading": "On the gram",
+        "handle": "@nailogy",
+        "link": ""
+      },
+      "blocks": {
+        "ig-1": {
+          "type": "tile",
+          "settings": {
+            "sample": "nl-demo-hand",
+            "color": "#E4DCCB"
+          }
+        },
+        "ig-2": {
+          "type": "tile",
+          "settings": {
+            "sample": "none",
+            "color": "#B98680"
+          }
+        },
+        "ig-3": {
+          "type": "tile",
+          "settings": {
+            "sample": "none",
+            "color": "#5E3B2E"
+          }
+        },
+        "ig-4": {
+          "type": "tile",
+          "settings": {
+            "sample": "nl-demo-fur",
+            "color": "#E4DCCB"
+          }
+        },
+        "ig-5": {
+          "type": "tile",
+          "settings": {
+            "sample": "nl-demo-hand",
+            "sample_position": "20% 80%",
+            "color": "#E4DCCB"
+          }
+        },
+        "ig-6": {
+          "type": "tile",
+          "settings": {
+            "sample": "none",
+            "color": "#C08A6B"
+          }
+        }
+      },
+      "block_order": [
+        "ig-1",
+        "ig-2",
+        "ig-3",
+        "ig-4",
+        "ig-5",
+        "ig-6"
+      ]
+    },
+    "service": {
+      "type": "nl-service-strip",
+      "settings": {
+        "aria_label": "Our promises",
+        "icon_color": "",
+        "padding_top": 0,
+        "padding_bottom": 0
+      },
+      "blocks": {
+        "service-1": {
+          "type": "item",
+          "settings": {
+            "icon": "truck",
+            "title": "Free UK delivery",
+            "text": "On orders over £40"
+          }
+        },
+        "service-2": {
+          "type": "item",
+          "settings": {
+            "icon": "box",
+            "title": "Fast dispatch",
+            "text": "Order by 2pm, sent same day"
+          }
+        },
+        "service-3": {
+          "type": "item",
+          "settings": {
+            "icon": "return",
+            "title": "Easy returns",
+            "text": "30 days on unopened items"
+          }
+        },
+        "service-4": {
+          "type": "item",
+          "settings": {
+            "icon": "lock",
+            "title": "Secure payment",
+            "text": "Card, Apple Pay, PayPal, Klarna"
+          }
+        }
+      },
+      "block_order": [
+        "service-1",
+        "service-2",
+        "service-3",
+        "service-4"
+      ]
+    },
+    "newsletter": {
+      "type": "nl-newsletter",
+      "settings": {
+        "heading": "Stay in touch",
+        "text": "<p>New shades, gentle how-tos and early Academy news. Once a fortnight, never more.</p>",
+        "placeholder": "Your email address",
+        "button_label": "Sign up",
+        "success": "Thank you. Your first email is on its way.",
+        "tags": "newsletter",
+        "small_print": "Unsubscribe at any time. See our <a href=\"/policies/privacy-policy\">Privacy Policy</a>."
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "promo",
+    "benefits",
+    "statement",
+    "bestsellers",
+    "panels",
+    "routine",
+    "academy",
+    "reviews",
+    "instagram",
+    "service",
+    "newsletter"
+  ]
+}

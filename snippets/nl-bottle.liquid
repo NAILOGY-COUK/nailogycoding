@@ -1,0 +1,38 @@
+{% comment %}
+  Renders the NAILOGY bottle illustration used as artwork when no image is chosen.
+  Purely decorative (aria-hidden).
+
+  Accepts:
+  - shade: {String} Colour of the gel inside the bottle (required)
+  - width: {String} CSS width of the bottle, e.g. '18%' (required)
+  - type: {String} 'gel' (default) or 'dropper'
+  - cap_width: {String} CSS width of the cap. Default: '46%'
+  - cap_radius: {Boolean} Round the top of the cap. Default: false
+  - label_size: {Number} Font size of the NAILOGY label in px. Blank hides the label.
+  - variant: {String} 'card' for the product-card proportions (optional)
+
+  Usage:
+  {% render 'nl-bottle', shade: '#5E3B2E', width: '18%' %}
+{% endcomment %}
+{%- liquid
+  assign cap_width = cap_width | default: '46%'
+  assign label_text = shop.name | upcase
+-%}
+<span class="nl-bottle{% if variant %} nl-bottle--{{ variant }}{% endif %}" aria-hidden="true" style="width: {{ width }};">
+  {%- if type == 'dropper' -%}
+    <span class="nl-bottle__pipette"></span>
+    <span class="nl-bottle__neck"></span>
+    <span class="nl-bottle__body nl-bottle__body--dropper" style="background: {{ shade }};">
+      {%- if label_size != blank -%}
+        <span class="nl-bottle__label" style="font-size: {{ label_size }}px;">{{ label_text }}</span>
+      {%- endif -%}
+    </span>
+  {%- else -%}
+    <span class="nl-bottle__cap{% if cap_radius %} nl-bottle__cap--round{% endif %}" style="width: {{ cap_width }};"></span>
+    <span class="nl-bottle__body" style="background: {{ shade }};">
+      {%- if label_size != blank -%}
+        <span class="nl-bottle__label" style="font-size: {{ label_size }}px;">{{ label_text }}</span>
+      {%- endif -%}
+    </span>
+  {%- endif -%}
+</span>

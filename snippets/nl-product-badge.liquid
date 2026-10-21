@@ -1,0 +1,38 @@
+{% comment %}
+  Renders the product badge used on cards and the product page. Outputs nothing when no badge applies.
+  Priority: Sold out (automatic) > Save X% (compare-at price, automatic) > New tag > Bestseller tag.
+  Tag names and marker colours: Theme settings > NAILOGY design tokens.
+
+  Accepts:
+  - product: {Object} Product (required)
+  - variant: {Object} Variant used for sale pricing. Default: product.selected_or_first_available_variant
+  - class: {String} Extra classes (optional)
+
+  Usage:
+  {% render 'nl-product-badge', product: product, class: 'nl-card__badge' %}
+{% endcomment %}
+{%- liquid
+  assign variant = variant | default: product.selected_or_first_available_variant
+  assign tag_new = settings.nl_tag_new | strip | downcase
+  assign tag_best = settings.nl_tag_bestseller | strip | downcase
+  assign tags = product.tags | join: '|' | downcase | split: '|'
+
+  assign badge = blank
+  if product.available == false
+    assign badge = 'nailogy.product.badge_sold_out' | t
+    assign marker = 'var(--nl-marker-sold-out)'
+  elsif variant.compare_at_price > variant.price
+    assign saving = variant.compare_at_price | minus: variant.price | times: 100.0 | divided_by: variant.compare_at_price | round
+    assign badge = 'nailogy.product.badge_save' | t: percent: saving
+    assign marker = 'var(--nl-marker-sale)'
+  elsif tag_new != blank and tags contains tag_new
+    assign badge = 'nailogy.product.badge_new' | t
+    assign marker = 'var(--nl-marker-new)'
+  elsif tag_best != blank and tags contains tag_best
+    assign badge = 'nailogy.product.badge_bestseller' | t
+    assign marker = 'var(--nl-marker-bestseller)'
+  endif
+-%}
+{%- if badge != blank -%}
+  <span class="nl-lbl nl-badge {{ class }}"><span class="nl-badge__marker" style="background: {{ marker }};"></span>{{ badge }}</span>
+{%- endif -%}

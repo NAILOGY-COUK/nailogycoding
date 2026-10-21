@@ -1,0 +1,98 @@
+{% comment %}
+  Outputs the NAILOGY design tokens (Theme settings > NAILOGY design tokens) as CSS custom properties.
+  Rendered once in layout/theme.liquid, after Dawn's own variables so brand fonts can override them.
+
+  Usage:
+  {% render 'nl-tokens' %}
+{% endcomment %}
+{%- liquid
+  assign walnut = settings.nl_color_walnut
+  assign on_dark = settings.nl_color_on_dark
+  assign parchment = settings.nl_color_parchment
+-%}
+{%- if settings.nl_use_brand_fonts -%}
+  {{ 'nl-manrope-latin.woff2' | asset_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: 'anonymous' }}
+  {{ 'nl-instrument-sans-500.woff2' | asset_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: 'anonymous' }}
+{%- endif -%}
+{% style %}
+  {%- if settings.nl_use_brand_fonts %}
+  @font-face {
+    font-family: 'Manrope';
+    src: url('{{ 'nl-manrope-latin.woff2' | asset_url }}') format('woff2');
+    font-weight: 200 800;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Instrument Sans';
+    src: url('{{ 'nl-instrument-sans-400.woff2' | asset_url }}') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Instrument Sans';
+    src: url('{{ 'nl-instrument-sans-500.woff2' | asset_url }}') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Instrument Sans';
+    src: url('{{ 'nl-instrument-sans-600.woff2' | asset_url }}') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+  }
+  {%- endif %}
+
+  :root {
+    --nl-parchment: {{ parchment }};
+    --nl-bone: {{ settings.nl_color_bone }};
+    --nl-walnut: {{ walnut }};
+    --nl-cinnamon: {{ settings.nl_color_cinnamon }};
+    --nl-olive: {{ settings.nl_color_olive }};
+    --nl-on-dark: {{ on_dark }};
+    --nl-muted: {{ settings.nl_color_muted }};
+    --nl-walnut-deep: {{ walnut | color_darken: 10 }};
+    --nl-line: {{ walnut | color_modify: 'alpha', 0.15 }};
+    --nl-walnut-25: {{ walnut | color_modify: 'alpha', 0.25 }};
+    --nl-overlay: {{ walnut | color_modify: 'alpha', 0.35 }};
+    --nl-walnut-80: {{ walnut | color_modify: 'alpha', 0.8 }};
+    --nl-parchment-70: {{ parchment | color_modify: 'alpha', 0.7 }};
+    --nl-line-dark: {{ on_dark | color_modify: 'alpha', 0.2 }};
+    --nl-on-dark-40: {{ on_dark | color_modify: 'alpha', 0.4 }};
+
+    --nl-marker-new: {{ settings.nl_marker_new }};
+    --nl-marker-bestseller: {{ settings.nl_marker_bestseller }};
+    --nl-marker-sale: {{ settings.nl_marker_sale }};
+    --nl-marker-sold-out: {{ settings.nl_marker_sold_out }};
+
+    {%- if settings.nl_use_brand_fonts %}
+    --nl-font-body: 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --nl-font-heading: 'Instrument Sans', 'Manrope', system-ui, sans-serif;
+    --font-body-family: var(--nl-font-body);
+    --font-body-weight: 400;
+    --font-body-weight-bold: 700;
+    --font-heading-family: var(--nl-font-heading);
+    --font-heading-weight: {{ settings.nl_heading_weight }};
+    {%- else %}
+    --nl-font-body: {{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }};
+    --nl-font-heading: {{ settings.type_header_font.family }}, {{ settings.type_header_font.fallback_families }};
+    {%- endif %}
+    --nl-heading-weight: {{ settings.nl_heading_weight }};
+    --nl-body-size: {{ settings.nl_body_size }}px;
+
+    --nl-page-width: {{ settings.nl_page_width }}px;
+    --nl-gutter: {{ settings.nl_gutter_mobile }}px;
+    --nl-section-y: {{ settings.nl_section_spacing_mobile }}px;
+    --nl-radius: {{ settings.nl_radius }}px;
+  }
+
+  @media screen and (min-width: 900px) {
+    :root {
+      --nl-gutter: {{ settings.nl_gutter_desktop }}px;
+      --nl-section-y: {{ settings.nl_section_spacing_desktop }}px;
+    }
+  }
+{% endstyle %}

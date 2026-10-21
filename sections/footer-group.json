@@ -1,0 +1,50 @@
+{
+  "name": "t:sections.footer.name",
+  "type": "footer",
+  "sections": {
+    "footer": {
+      "type": "nl-footer",
+      "settings": {
+        "logo_text": "NAILOGY",
+        "text": "Professional nail care, made calm. Designed in the UK.",
+        "show_social": true,
+        "show_payment": true,
+        "show_currency": true,
+        "copyright_name": "NAILOGY",
+        "copyright_suffix": "All prices include VAT.",
+        "legal_menu": "footer-legal"
+      },
+      "blocks": {
+        "menu-1": {
+          "type": "menu",
+          "settings": {
+            "heading": "Shop",
+            "menu": "footer-shop"
+          }
+        },
+        "menu-2": {
+          "type": "menu",
+          "settings": {
+            "heading": "Help",
+            "menu": "footer-help"
+          }
+        },
+        "menu-3": {
+          "type": "menu",
+          "settings": {
+            "heading": "About",
+            "menu": "footer-about"
+          }
+        }
+      },
+      "block_order": [
+        "menu-1",
+        "menu-2",
+        "menu-3"
+      ]
+    }
+  },
+  "order": [
+    "footer"
+  ]
+}

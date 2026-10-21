@@ -1,0 +1,20 @@
+{% comment %}
+  Renders five stars; stars above the whole-number rating are faded.
+
+  Accepts:
+  - rating: {Number} 0–5 (required)
+  - px: {Number} Star size in px. Default: 16
+
+  Usage:
+  {% render 'nl-stars', rating: 4.8, px: 18 %}
+{% endcomment %}
+{%- assign full = rating | floor -%}
+<span class="nl-stars" role="img" aria-label="{{ 'nailogy.reviews.rating_label' | t: rating: rating }}">
+  {%- for i in (1..5) -%}
+    {%- if i <= full -%}
+      {%- render 'nl-icon', icon: 'star', px: px -%}
+    {%- else -%}
+      {%- render 'nl-icon', icon: 'star', px: px, opacity: '.35' -%}
+    {%- endif -%}
+  {%- endfor -%}
+</span>

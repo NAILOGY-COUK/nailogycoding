@@ -1,0 +1,41 @@
+{% comment %}
+  Renders a bordered row of icon + title + text items (benefits, service promises).
+
+  Accepts:
+  - blocks: {Array} Section blocks with icon, title, text settings (required)
+  - variant: {String} 'benefits' or 'service' (required)
+  - icon_color: {String} Icon stroke colour (required)
+
+  Usage:
+  {% render 'nl-icon-row', blocks: section.blocks, variant: 'benefits', icon_color: '#8A8666' %}
+{% endcomment %}
+{%- liquid
+  if variant == 'benefits'
+    assign icon_size = 30
+  else
+    assign icon_size = 26
+  endif
+-%}
+<ul class="list-unstyled nl-g2-4 nl-icon-row nl-icon-row--{{ variant }}" role="list">
+  {%- for block in blocks -%}
+    <li class="nl-icon-row__item" {{ block.shopify_attributes }}>
+      <span class="nl-icon-row__icon" style="color: {{ icon_color }};">
+        {%- if block.settings.custom_icon != blank -%}
+          {{
+            block.settings.custom_icon
+            | image_url: width: 120
+            | image_tag: width: icon_size, height: icon_size, loading: 'lazy', alt: ''
+          }}
+        {%- else -%}
+          {%- render 'nl-icon', icon: block.settings.icon, px: icon_size, stroke: 1.3, linejoin: true -%}
+        {%- endif -%}
+      </span>
+      <span class="nl-icon-row__copy">
+        <span class="nl-icon-row__title">{{ block.settings.title | escape }}</span>
+        {%- if block.settings.text != blank -%}
+          <span class="nl-icon-row__text">{{ block.settings.text | escape }}</span>
+        {%- endif -%}
+      </span>
+    </li>
+  {%- endfor -%}
+</ul>

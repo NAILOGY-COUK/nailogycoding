@@ -1,0 +1,298 @@
+{%- liquid
+  assign slide_count = section.blocks.size
+  assign panel_bg = section.settings.panel_background | default: settings.nl_color_bone
+-%}
+
+<nl-carousel
+  class="nl-s nl-hero-carousel"
+  role="region"
+  aria-roledescription="carousel"
+  aria-label="{{ section.settings.aria_label | escape }}"
+  {% if section.settings.autoplay and slide_count > 1 %}
+    data-autoplay="{{ section.settings.autoplay_speed | times: 1000 }}"
+  {% endif %}
+>
+  {%- for block in section.blocks -%}
+    {%- liquid
+      assign heading_tag = 'h2'
+      if forloop.first and section.settings.first_heading_h1
+        assign heading_tag = 'h1'
+      endif
+    -%}
+    <div
+      class="nl-hero"
+      id="NlSlide-{{ block.id }}"
+      role="group"
+      aria-roledescription="slide"
+      aria-label="{{ 'nailogy.carousel.slide_of' | t: index: forloop.index, count: slide_count }}"
+      data-nl-slide
+      {% unless forloop.first %}
+        hidden
+      {% endunless %}
+      {{ block.shopify_attributes }}
+    >
+      <div class="nl-hero__txt" style="background: {{ panel_bg }};">
+        {%- if block.settings.label != blank -%}
+          <span class="nl-lbl nl-lbl--marker">
+            <span class="nl-marker" style="background: {{ block.settings.marker_color }};" aria-hidden="true"></span>
+            {{- block.settings.label -}}
+          </span>
+        {%- endif -%}
+        {%- if block.settings.heading != blank -%}
+          <{{ heading_tag }} class="nl-h nl-hero__heading">{{ block.settings.heading }}</{{ heading_tag }}>
+        {%- endif -%}
+        {%- if block.settings.text != blank -%}
+          <p class="nl-text-lg nl-hero__text">{{ block.settings.text }}</p>
+        {%- endif -%}
+        {%- if block.settings.button_label != blank -%}
+          <div>
+            <a class="nl-btn" {% if block.settings.button_link != blank %}href="{{ block.settings.button_link }}"{% else %}role="link" aria-disabled="true"{% endif %}>
+              {{- block.settings.button_label | escape -}}
+            </a>
+          </div>
+        {%- endif -%}
+      </div>
+
+      {%- case block.settings.art -%}
+        {%- when 'bottles' -%}
+          <div class="nl-hero__art nl-art--bottles nl-hero__art--bottles">
+            {%- render 'nl-bottle', shade: block.settings.shade_1, width: '15%', cap_radius: true, label_size: 7 -%}
+            {%- render 'nl-bottle', shade: block.settings.shade_2, width: '19%', cap_radius: true, label_size: 8 -%}
+            {%- render 'nl-bottle', shade: block.settings.shade_3, width: '15%', cap_radius: true, label_size: 7 -%}
+          </div>
+        {%- when 'swatches' -%}
+          <div class="nl-hero__art nl-art--swatches" aria-hidden="true">
+            <span style="background: {{ block.settings.shade_1 }};"></span>
+            <span style="background: {{ block.settings.shade_2 }};"></span>
+            <span style="background: {{ block.settings.shade_3 }};"></span>
+            <span style="background: {{ block.settings.shade_4 }};"></span>
+          </div>
+        {%- else -%}
+          <div class="nl-hero__art">
+            {%- liquid
+              assign loading = 'lazy'
+              assign priority = 'auto'
+              if forloop.first and section.index <= 2
+                assign loading = 'eager'
+                assign priority = 'high'
+              endif
+            -%}
+            {%- if block.settings.image != blank -%}
+              {%- assign focal_style = block.settings.image.presentation.focal_point
+                | default: '50% 50%'
+                | prepend: 'object-position: '
+              -%}
+              {{
+                block.settings.image
+                | image_url: width: 2400
+                | image_tag:
+                  class: 'nl-art__img',
+                  widths: '450, 750, 900, 1100, 1400, 1800, 2400',
+                  sizes: '(min-width: 900px) 58vw, 100vw',
+                  loading: loading,
+                  fetchpriority: priority,
+                  style: focal_style
+              }}
+            {%- else -%}
+              <img
+                class="nl-art__img"
+                src="{{ 'nl-demo-hand.jpg' | asset_url }}"
+                alt="{{ block.settings.image_alt | escape }}"
+                width="1290"
+                height="1219"
+                loading="{{ loading }}"
+                style="object-position: 60% 50%;"
+              >
+            {%- endif -%}
+          </div>
+      {%- endcase -%}
+    </div>
+  {%- endfor -%}
+
+  {%- if slide_count > 1 -%}
+    <div class="nl-wrap nl-hero-carousel__controls-wrap">
+      <div class="nl-hero-carousel__controls">
+        <button class="nl-ib nl-hero-carousel__arrow" type="button" aria-label="{{ 'nailogy.carousel.previous' | t }}" data-nl-prev>
+          {%- render 'nl-icon', icon: 'arrow-left', px: 20 -%}
+        </button>
+        <div class="nl-hero-carousel__dots">
+          {%- for block in section.blocks -%}
+            <button
+              type="button"
+              class="nl-hero-carousel__dot"
+              aria-label="{{ 'nailogy.carousel.go_to' | t: index: forloop.index }}"
+              aria-controls="NlSlide-{{ block.id }}"
+              aria-current="{% if forloop.first %}true{% else %}false{% endif %}"
+              data-nl-dot="{{ forloop.index0 }}"
+            >
+              <span></span>
+            </button>
+          {%- endfor -%}
+        </div>
+        <button class="nl-ib nl-hero-carousel__arrow" type="button" aria-label="{{ 'nailogy.carousel.next' | t }}" data-nl-next>
+          {%- render 'nl-icon', icon: 'arrow-right', px: 20 -%}
+        </button>
+      </div>
+    </div>
+  {%- endif -%}
+</nl-carousel>
+
+<script src="{{ 'nl-carousel.js' | asset_url }}" defer="defer"></script>
+
+{% schema %}
+{
+  "name": "NL Hero carousel",
+  "tag": "section",
+  "class": "nl-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "aria_label",
+      "label": "Carousel name for screen readers",
+      "default": "Featured collections"
+    },
+    {
+      "type": "checkbox",
+      "id": "first_heading_h1",
+      "label": "Use the first slide heading as the page heading (H1)",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "panel_background",
+      "label": "Text panel background",
+      "info": "Leave empty to use Bone from the design tokens."
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Auto-rotate slides",
+      "default": false,
+      "info": "Pauses on hover and focus, and is turned off for visitors who prefer reduced motion."
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "label": "Change slides every",
+      "default": 6
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "New · Autumn edit"
+        },
+        {
+          "type": "color",
+          "id": "marker_color",
+          "label": "Label marker colour",
+          "default": "#B9704D"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Warm shades for slower days"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "Clay, cocoa and fig. Six new gel colours made to wear quietly for up to three weeks."
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label",
+          "default": "Shop now"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        },
+        {
+          "type": "header",
+          "content": "Artwork"
+        },
+        {
+          "type": "select",
+          "id": "art",
+          "label": "Artwork style",
+          "default": "image",
+          "options": [
+            { "value": "image", "label": "Image" },
+            { "value": "bottles", "label": "Bottle trio illustration" },
+            { "value": "swatches", "label": "Four colour swatches" }
+          ]
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "Set a focal point on the image to control cropping."
+        },
+        {
+          "type": "text",
+          "id": "image_alt",
+          "label": "Placeholder image description",
+          "default": "Hand resting on white linen, nails in a soft nude gel",
+          "info": "Only used for the sample image shown before you choose one. Chosen images use their own alt text."
+        },
+        {
+          "type": "color",
+          "id": "shade_1",
+          "label": "Shade 1",
+          "default": "#EDE6DD"
+        },
+        {
+          "type": "color",
+          "id": "shade_2",
+          "label": "Shade 2",
+          "default": "#D8C0A3"
+        },
+        {
+          "type": "color",
+          "id": "shade_3",
+          "label": "Shade 3",
+          "default": "#B98680"
+        },
+        {
+          "type": "color",
+          "id": "shade_4",
+          "label": "Shade 4 (swatches only)",
+          "default": "#1C1716"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "NL Hero carousel",
+      "blocks": [
+        { "type": "slide" },
+        {
+          "type": "slide",
+          "settings": {
+            "label": "New · Builder Gel in a Bottle",
+            "heading": "Strength you can brush on",
+            "text": "A self-levelling builder that adds structure to natural nails. No pots, no files, no fuss.",
+            "art": "bottles"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

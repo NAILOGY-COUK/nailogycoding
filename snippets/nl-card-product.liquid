@@ -1,0 +1,205 @@
+{% comment %}
+  Renders a NAILOGY product card: media with badge, shade drop and video tag, title, subtitle,
+  price with compare-at ("Was"), and a quick-add button that uses Dawn's product-form / quick-add modal.
+
+  Data sources:
+  - Badge: snippets/nl-product-badge.liquid (sold out, Save X%, New and Bestseller tags).
+  - Subtitle: product metafield custom.subtitle (single line text), falls back to product type.
+  - Shade: product metafield custom.shade (colour). Used for the shade drop and the illustration fallback.
+
+  Accepts:
+  - card_product: {Object} Product (required)
+  - section_id: {String} Section id, used for unique ids (required)
+  - quick_add: {Boolean} Show the add to basket button. Default: true
+  - show_shade: {Boolean} Show the animated shade drop. Default: true
+  - show_video: {Boolean} Show the Video tag when the product has video media. Default: true
+  - lazy_load: {Boolean} Lazy load the image. Default: true
+  - heading_tag: {String} Element for the product title. Default: 'h3'
+  - list_item: {Boolean} Set false when the card is already inside an <li>. Default: true
+
+  Usage:
+  {% render 'nl-card-product', card_product: product, section_id: section.id %}
+{% endcomment %}
+{%- liquid
+  assign variant = card_product.selected_or_first_available_variant
+  assign heading_tag = heading_tag | default: 'h3'
+  assign image_loading = 'lazy'
+  if lazy_load == false
+    assign image_loading = 'eager'
+  endif
+
+  assign subtitle = card_product.metafields.custom.subtitle.value | default: card_product.type
+  assign shade = card_product.metafields.custom.shade.value
+  assign has_shade = true
+  if shade == blank
+    assign has_shade = false
+    assign shade = settings.nl_color_bone | color_darken: 12
+  endif
+
+  if card_product.price_varies
+    assign min_price = card_product.price_min | money
+    assign price_text = 'nailogy.product.from_price' | t: price: min_price
+  else
+    assign price_text = variant.price | money
+  endif
+
+  assign on_sale = false
+  if variant.compare_at_price > variant.price
+    assign on_sale = true
+  endif
+
+  capture badge_html
+    render 'nl-product-badge', product: card_product, variant: variant, class: 'nl-card__badge'
+  endcapture
+  assign badge = badge_html | strip_html | strip
+
+  assign has_video = false
+  for media in card_product.media
+    if media.media_type == 'video' or media.media_type == 'external_video'
+      assign has_video = true
+      break
+    endif
+  endfor
+
+  capture card_label
+    echo card_product.title
+    if subtitle != blank
+      echo ', ' | append: subtitle
+    endif
+    echo ', ' | append: price_text
+    if badge != blank
+      echo ', ' | append: badge
+    endif
+  endcapture
+
+  assign qty_rules = false
+  if variant.quantity_rule.min > 1 or variant.quantity_rule.max != null or variant.quantity_rule.increment > 1
+    assign qty_rules = true
+  endif
+
+  assign form_id = 'nl-quick-add-' | append: section_id | append: '-' | append: card_product.id
+  assign title_id = 'NlCardTitle-' | append: section_id | append: '-' | append: card_product.id
+-%}
+
+<product-component
+  class="nl-card{% unless card_product.available %} nl-card--sold-out{% endunless %}"
+  {% unless list_item == false %}
+    role="listitem"
+  {% endunless %}
+  view-event-payload="{{ card_product | standard_event_data: 'view', context: product_view_context | escape }}"
+>
+  <a href="{{ card_product.url }}" class="nl-card__media" aria-label="{{ card_label | strip | escape }}">
+    {%- if card_product.featured_media -%}
+      {{
+        card_product.featured_media
+        | image_url: width: 900
+        | image_tag:
+          class: 'nl-card__img',
+          widths: '240, 360, 480, 600, 750, 900',
+          sizes: '(min-width: 900px) 25vw, 46vw',
+          loading: image_loading,
+          alt: card_product.featured_media.alt
+      }}
+    {%- else -%}
+      <span class="nl-card__bottle">
+        {%- render 'nl-bottle', shade: shade, width: '100%', cap_width: '44%', cap_radius: true, label_size: 7, variant: 'card' -%}
+      </span>
+    {%- endif -%}
+
+    {%- if has_shade and show_shade != false -%}
+      <span class="nl-card__drop" aria-hidden="true">
+        <span class="nl-loop" style="background: {{ shade }};"></span>
+      </span>
+    {%- endif -%}
+
+    {{- badge_html -}}
+
+    {%- if has_video and show_video != false -%}
+      <span class="nl-lbl nl-card__video" aria-hidden="true">
+        {%- render 'nl-icon', icon: 'play-small', px: 8 -%}
+        {{- 'nailogy.product.video' | t -}}
+      </span>
+    {%- endif -%}
+  </a>
+
+  <div class="nl-card__info">
+    <div class="nl-card__names">
+      <{{ heading_tag }} class="nl-card__title" id="{{ title_id }}">
+        <a href="{{ card_product.url }}">{{ card_product.title | escape }}</a>
+      </{{ heading_tag }}>
+      {%- if subtitle != blank -%}
+        <span class="nl-card__sub">{{ subtitle | escape }}</span>
+      {%- endif -%}
+    </div>
+    <div class="nl-card__price">
+      <span class="nl-card__price-now">{{ price_text }}</span>
+      {%- if on_sale -%}
+        <s class="nl-card__price-was">
+          <span class="visually-hidden">{{ 'nailogy.product.was' | t }} </span>
+          {{- variant.compare_at_price | money -}}
+        </s>
+      {%- endif -%}
+    </div>
+  </div>
+
+  {%- if quick_add != false -%}
+    {%- if card_product.available == false -%}
+      <button class="nl-btn nl-btn--outline nl-btn--small nl-btn--full" type="button" disabled>
+        {{- 'nailogy.product.sold_out' | t -}}
+      </button>
+    {%- elsif card_product.variants_count > 1 or qty_rules -%}
+      <modal-opener data-modal="#QuickAdd-{{ section_id }}-{{ card_product.id }}" class="nl-card__opener">
+        <button
+          id="{{ form_id }}-submit"
+          type="button"
+          class="nl-btn nl-btn--outline nl-btn--small nl-btn--full quick-add__submit"
+          aria-haspopup="dialog"
+          aria-labelledby="{{ form_id }}-submit {{ title_id }}"
+          data-product-url="{{ card_product.url }}"
+        >
+          <span>{{ 'nailogy.product.choose' | t }}</span>
+          {%- render 'loading-spinner' -%}
+        </button>
+      </modal-opener>
+      <quick-add-modal id="QuickAdd-{{ section_id }}-{{ card_product.id }}" class="quick-add-modal">
+        <div
+          role="dialog"
+          aria-label="{{ 'products.product.choose_product_options' | t: product_name: card_product.title | escape }}"
+          aria-modal="true"
+          class="quick-add-modal__content global-settings-popup"
+          tabindex="-1"
+        >
+          <button
+            id="ModalClose-{{ section_id }}-{{ card_product.id }}"
+            type="button"
+            class="quick-add-modal__toggle"
+            aria-label="{{ 'accessibility.close' | t }}"
+          >
+            {{- 'icon-close.svg' | inline_asset_content -}}
+          </button>
+          <div id="QuickAddInfo-{{ section_id }}-{{ card_product.id }}" class="quick-add-modal__content-info"></div>
+        </div>
+      </quick-add-modal>
+    {%- else -%}
+      <product-form data-section-id="{{ section_id }}" class="nl-card__form">
+        {%- form 'product', card_product, id: form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+          <input type="hidden" name="id" value="{{ variant.id }}" class="product-variant-id">
+          <div class="product-form__error-message-wrapper nl-card__error" role="alert" hidden>
+            <span class="product-form__error-message"></span>
+          </div>
+          <button
+            id="{{ form_id }}-submit"
+            type="submit"
+            name="add"
+            class="nl-btn nl-btn--outline nl-btn--small nl-btn--full"
+            aria-labelledby="{{ form_id }}-submit {{ title_id }}"
+          >
+            <span>{{ 'nailogy.product.add' | t }}</span>
+            <span class="sold-out-message hidden">{{ 'nailogy.product.sold_out' | t }}</span>
+            {%- render 'loading-spinner' -%}
+          </button>
+        {%- endform -%}
+      </product-form>
+    {%- endif -%}
+  {%- endif -%}
+</product-component>

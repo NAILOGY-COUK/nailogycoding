@@ -1,0 +1,313 @@
+{% comment %}
+  NAILOGY basket drawer (restyled Dawn cart drawer).
+  Keeps every hook used by assets/cart-drawer.js and assets/cart.js:
+  cart-drawer, #CartDrawer, #CartDrawer-Overlay, .drawer__inner, .drawer__inner-empty,
+  cart-drawer-items, #CartDrawer-Form, #CartDrawer-CartItems, #CartDrawer-Item-N, quantity-input,
+  #Drawer-quantity-N, cart-remove-button, #CartDrawer-LineItemError-N, live regions,
+  .cart-drawer__footer and #CartDrawer-Checkout.
+
+  Usage:
+  {% render 'cart-drawer' %}
+{% endcomment %}
+
+<script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
+
+<style>
+  .drawer {
+    visibility: hidden;
+  }
+</style>
+
+<cart-drawer class="drawer nl-basket{% if cart.item_count == 0 %} is-empty{% endif %}">
+  <div id="CartDrawer" class="cart-drawer nl-basket__frame">
+    <div id="CartDrawer-Overlay" class="nl-basket__overlay"></div>
+    <div
+      class="drawer__inner nl-s nl-basket__panel"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="CartDrawer-Heading"
+      tabindex="-1"
+    >
+      <cart-drawer-items
+        class="nl-basket__body{% if cart.item_count == 0 %} is-empty{% endif %}"
+        view-event-payload="{{ cart | standard_event_data: 'view', context: 'dialog' | escape }}"
+        view-event-trigger="manual"
+      >
+        <div class="nl-basket__head drawer__header">
+          <h2 id="CartDrawer-Heading" class="nl-h nl-basket__title">
+            {{- 'nailogy.basket.title' | t }}
+            <span class="nl-basket__count">({{ cart.item_count }})</span>
+          </h2>
+          <button
+            class="nl-ib drawer__close"
+            type="button"
+            onclick="this.closest('cart-drawer').close()"
+            aria-label="{{ 'nailogy.basket.close' | t }}"
+          >
+            {%- render 'nl-icon', icon: 'close', px: 20 -%}
+          </button>
+        </div>
+
+        {%- render 'nl-free-delivery' -%}
+
+        {%- if cart.item_count == 0 -%}
+          <div class="drawer__inner-empty nl-basket__empty">
+            <p>{{ 'nailogy.basket.empty' | t }}</p>
+            <a href="{{ routes.all_products_collection_url }}" class="nl-btn nl-btn--outline nl-btn--small">
+              {{- 'nailogy.basket.continue' | t -}}
+            </a>
+            {%- if settings.cart_drawer_collection != blank -%}
+              {%- assign empty_collection = settings.cart_drawer_collection -%}
+              <a class="nl-tl" href="{{ empty_collection.url }}">{{ empty_collection.title | escape }}</a>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+
+        <form action="{{ routes.cart_url }}" id="CartDrawer-Form" class="cart__contents nl-basket__form" method="post">
+          <div id="CartDrawer-CartItems" class="drawer__contents js-contents">
+            {%- if cart.item_count > 0 -%}
+              <ul class="list-unstyled nl-basket__list" role="list" aria-label="{{ 'sections.cart.caption' | t }}">
+                {%- for item in cart.items -%}
+                  {%- liquid
+                    assign line = item.index | plus: 1
+                    assign item_sub = item.product.metafields.custom.subtitle.value | default: item.product.type
+                    assign item_shade = item.product.metafields.custom.shade.value | default: settings.nl_color_bone
+                    assign can_update = true
+                    if item.instructions and item.instructions.can_update_quantity == false
+                      assign can_update = false
+                    endif
+                  -%}
+                  <li
+                    id="CartDrawer-Item-{{ line }}"
+                    class="cart-item nl-basket__item{% if item.parent_relationship.parent != null %} nl-basket__item--nested{% endif %}"
+                    {% if item.parent_relationship.parent != null %}
+                      aria-label="{{- 'products.product.nested_label' | t: title: item.product.title, parent_title: item.parent_relationship.parent.title | escape -}}"
+                    {% endif %}
+                  >
+                    <a href="{{ item.url }}" class="nl-basket__thumb" tabindex="-1" aria-hidden="true">
+                      {%- if item.image -%}
+                        <img
+                          src="{{ item.image | image_url: width: 216 }}"
+                          alt=""
+                          loading="lazy"
+                          width="72"
+                          height="90"
+                        >
+                      {%- else -%}
+                        <span class="nl-basket__mini-bottle">
+                          <span class="nl-basket__mini-cap"></span>
+                          <span class="nl-basket__mini-body" style="background: {{ item_shade }};"></span>
+                        </span>
+                      {%- endif -%}
+                    </a>
+
+                    <div class="nl-basket__details">
+                      <div class="nl-basket__row">
+                        <a href="{{ item.url }}" class="cart-item__name nl-basket__name">{{ item.product.title | escape }}</a>
+                        <span class="nl-basket__line-price">
+                          {%- render 'loading-spinner' -%}
+                          {%- if item.original_line_price != item.final_line_price -%}
+                            <s>
+                              <span class="visually-hidden">{{ 'products.product.price.regular_price' | t }}</span>
+                              {{- item.original_line_price | money -}}
+                            </s>
+                            <span class="visually-hidden">{{ 'products.product.price.sale_price' | t }}</span>
+                          {%- endif -%}
+                          <span>{{ item.final_line_price | money }}</span>
+                        </span>
+                      </div>
+
+                      {%- if item_sub != blank -%}
+                        <span class="nl-basket__sub">{{ item_sub | escape }}</span>
+                      {%- endif -%}
+
+                      {%- assign cart_disclosure_modal_id = 'CartDisclosureModal-drawer-' | append: item.key | replace: ':', '-' -%}
+                      {%- render 'cart-disclosure-indicator', product: item.product, modal_id: cart_disclosure_modal_id -%}
+
+                      {%- if item.product.has_only_default_variant == false
+                        or item.properties.size != 0
+                        or item.selling_plan_allocation != null
+                      -%}
+                        <dl class="nl-basket__options">
+                          {%- if item.product.has_only_default_variant == false -%}
+                            {%- for option in item.options_with_values -%}
+                              <div>
+                                <dt>{{ option.name }}:</dt>
+                                <dd>{{ option.value }}</dd>
+                              </div>
+                            {%- endfor -%}
+                          {%- endif -%}
+                          {%- for property in item.properties -%}
+                            {%- assign property_first_char = property.first | slice: 0 -%}
+                            {%- if property.last != blank and property_first_char != '_' -%}
+                              <div>
+                                <dt>{{ property.first }}:</dt>
+                                <dd>
+                                  {%- if property.last contains '/uploads/' -%}
+                                    <a href="{{ property.last }}" target="_blank" aria-describedby="a11y-new-window-message">
+                                      {{- property.last | split: '/' | last -}}
+                                    </a>
+                                  {%- else -%}
+                                    {{- property.last -}}
+                                  {%- endif -%}
+                                </dd>
+                              </div>
+                            {%- endif -%}
+                          {%- endfor -%}
+                          {%- if item.selling_plan_allocation != null -%}
+                            <div>
+                              <dd>{{ item.selling_plan_allocation.selling_plan.name }}</dd>
+                            </div>
+                          {%- endif -%}
+                        </dl>
+                      {%- endif -%}
+
+                      {%- if item.variant.available and item.unit_price_measurement -%}
+                        {% render 'unit-price', price: item.unit_price, measurement: item.unit_price_measurement %}
+                      {%- endif -%}
+
+                      {%- if item.line_level_discount_allocations.size > 0 -%}
+                        <ul class="list-unstyled nl-basket__discounts" role="list" aria-label="{{ 'customer.order.discount' | t }}">
+                          {%- for discount in item.line_level_discount_allocations -%}
+                            <li>{{ discount.discount_application.title | escape }}</li>
+                          {%- endfor -%}
+                        </ul>
+                      {%- endif -%}
+
+                      <div class="nl-basket__controls">
+                        <quantity-input class="nl-qty">
+                          <button
+                            class="quantity__button nl-qty__btn"
+                            name="minus"
+                            type="button"
+                            {% unless can_update %}
+                              disabled
+                            {% endunless %}
+                          >
+                            <span class="visually-hidden">{{ 'nailogy.basket.decrease' | t: product: item.product.title | escape }}</span>
+                            <span aria-hidden="true">−</span>
+                          </button>
+                          <input
+                            class="quantity__input nl-qty__input"
+                            type="number"
+                            inputmode="numeric"
+                            data-quantity-variant-id="{{ item.variant.id }}"
+                            data-quantity-line-key="{{ item.key }}"
+                            name="updates[]"
+                            value="{{ item.quantity }}"
+                            {% # theme-check-disable %}
+                            data-cart-quantity="{{ cart | item_count_for_variant: item.variant.id }}"
+                            min="0"
+                            data-min="{{ item.variant.quantity_rule.min }}"
+                            {% if item.variant.quantity_rule.max != null %}
+                              max="{{ item.variant.quantity_rule.max }}"
+                            {% endif %}
+                            step="{{ item.variant.quantity_rule.increment }}"
+                            {% # theme-check-enable %}
+                            aria-label="{{ 'products.product.quantity.input_label' | t: product: item.product.title | escape }}"
+                            id="Drawer-quantity-{{ line }}"
+                            data-index="{{ line }}"
+                            {% unless can_update %}
+                              disabled
+                            {% endunless %}
+                          >
+                          <button
+                            class="quantity__button nl-qty__btn"
+                            name="plus"
+                            type="button"
+                            {% unless can_update %}
+                              disabled
+                            {% endunless %}
+                          >
+                            <span class="visually-hidden">{{ 'nailogy.basket.increase' | t: product: item.product.title | escape }}</span>
+                            <span aria-hidden="true">+</span>
+                          </button>
+                        </quantity-input>
+
+                        {%- unless item.instructions and item.instructions.can_remove == false -%}
+                          <cart-remove-button id="CartDrawer-Remove-{{ line }}" data-index="{{ line }}">
+                            <button
+                              type="button"
+                              class="nl-basket__remove"
+                              aria-label="{{ 'sections.cart.remove_title' | t: title: item.title | escape }}"
+                              data-variant-id="{{ item.variant.id }}"
+                            >
+                              {{- 'nailogy.basket.remove' | t -}}
+                            </button>
+                          </cart-remove-button>
+                        {%- endunless -%}
+                      </div>
+
+                      <div id="CartDrawer-LineItemError-{{ line }}" class="cart-item__error nl-basket__error" role="alert">
+                        <small class="cart-item__error-text"></small>
+                      </div>
+                    </div>
+                  </li>
+                {%- endfor -%}
+              </ul>
+            {%- endif -%}
+            <p id="CartDrawer-LiveRegionText" class="visually-hidden" role="status"></p>
+            <p id="CartDrawer-LineItemStatus" class="visually-hidden" aria-hidden="true" role="status">
+              {{ 'accessibility.loading' | t }}
+            </p>
+          </div>
+          <div id="CartDrawer-CartErrors" class="nl-basket__errors" role="alert"></div>
+        </form>
+      </cart-drawer-items>
+
+      <div class="drawer__footer nl-basket__foot">
+        {%- if settings.show_cart_note -%}
+          <details id="Details-CartDrawer" class="nl-basket__note">
+            <summary>{{ 'sections.cart.note' | t }}</summary>
+            <cart-note class="cart__note field">
+              <label class="visually-hidden" for="CartDrawer-Note">{{ 'sections.cart.note' | t }}</label>
+              <textarea
+                id="CartDrawer-Note"
+                class="nl-inp nl-basket__note-input"
+                name="note"
+                placeholder="{{ 'sections.cart.note' | t }}"
+              >{{ cart.note }}</textarea>
+            </cart-note>
+          </details>
+        {%- endif -%}
+
+        <div class="cart-drawer__footer nl-basket__totals">
+          {%- if cart.cart_level_discount_applications.size > 0 -%}
+            <ul class="list-unstyled nl-basket__discounts" role="list" aria-label="{{ 'customer.order.discount' | t }}">
+              {%- for discount in cart.cart_level_discount_applications -%}
+                <li>{{ discount.title | escape }} (-{{ discount.total_allocated_amount | money }})</li>
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
+          <div class="nl-basket__subtotal" role="status">
+            <span>{{ 'nailogy.basket.subtotal' | t }}</span>
+            <span>{{ cart.total_price | money }}</span>
+          </div>
+          <span class="nl-basket__small">
+            {%- if cart.taxes_included -%}
+              {{- 'nailogy.basket.tax_note' | t -}}
+            {%- else -%}
+              {{- 'nailogy.basket.tax_note_excluded' | t -}}
+            {%- endif -%}
+          </span>
+        </div>
+
+        <button
+          type="submit"
+          id="CartDrawer-Checkout"
+          class="nl-btn nl-btn--full"
+          name="checkout"
+          form="CartDrawer-Form"
+          {% if cart.item_count == 0 %}
+            disabled
+          {% endif %}
+        >
+          {{ 'nailogy.basket.checkout' | t }}
+        </button>
+        {%- if settings.nl_basket_payment_note != blank -%}
+          <span class="nl-basket__small nl-basket__pay-note">{{ settings.nl_basket_payment_note | escape }}</span>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</cart-drawer>

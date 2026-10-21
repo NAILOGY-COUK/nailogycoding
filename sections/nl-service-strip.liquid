@@ -1,0 +1,163 @@
+{%- assign icon_color = section.settings.icon_color | default: settings.nl_color_walnut -%}
+<div class="nl-s nl-wrap" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;">
+  {%- if section.settings.aria_label != blank -%}
+    <h2 class="visually-hidden">{{ section.settings.aria_label | escape }}</h2>
+  {%- endif -%}
+  {%- render 'nl-icon-row', blocks: section.blocks, variant: 'service', icon_color: icon_color -%}
+</div>
+
+{% schema %}
+{
+  "name": "NL Service strip",
+  "tag": "section",
+  "class": "nl-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "aria_label",
+      "label": "Section name for screen readers",
+      "default": "Our promises"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icon colour",
+      "info": "Leave empty to use Deep Walnut from the design tokens."
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "default": "truck",
+          "options": [
+            {
+              "value": "leaf",
+              "label": "Leaf (vegan)"
+            },
+            {
+              "value": "clock",
+              "label": "Clock (long-wear)"
+            },
+            {
+              "value": "shield",
+              "label": "Shield (safe formula)"
+            },
+            {
+              "value": "spark",
+              "label": "Spark (quality)"
+            },
+            {
+              "value": "truck",
+              "label": "Delivery van"
+            },
+            {
+              "value": "box",
+              "label": "Parcel"
+            },
+            {
+              "value": "return",
+              "label": "Return arrow"
+            },
+            {
+              "value": "lock",
+              "label": "Padlock"
+            },
+            {
+              "value": "check",
+              "label": "Tick"
+            },
+            {
+              "value": "star",
+              "label": "Star"
+            }
+          ]
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_icon",
+          "label": "Custom icon",
+          "info": "Optional. Replaces the icon above. Use a square SVG or PNG."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Free UK delivery"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "On orders over £40"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "NL Service strip",
+      "blocks": [
+        {
+          "type": "item",
+          "settings": {
+            "icon": "truck",
+            "title": "Free UK delivery",
+            "text": "On orders over £40"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "icon": "box",
+            "title": "Fast dispatch",
+            "text": "Order by 2pm, sent same day"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "icon": "return",
+            "title": "Easy returns",
+            "text": "30 days on unopened items"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "icon": "lock",
+            "title": "Secure payment",
+            "text": "Card, Apple Pay, PayPal, Klarna"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,169 @@
+{%- liquid
+  assign collection = section.settings.collection
+  assign view_all_link = section.settings.view_all_link | default: collection.url
+  assign heading_id = 'NlRailHeading-' | append: section.id
+-%}
+
+{%- if section.settings.quick_add -%}
+  {{ 'quick-add.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+
+<div
+  class="nl-s nl-wrap nl-rail-section"
+  style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="nl-head-row">
+    <div class="nl-head-row__titles">
+      {%- if section.settings.label != blank -%}
+        <span class="nl-lbl">{{ section.settings.label | escape }}</span>
+      {%- endif -%}
+      <h2 id="{{ heading_id }}" class="nl-h nl-h--section">{{ section.settings.heading | escape }}</h2>
+    </div>
+    {%- if section.settings.view_all_label != blank and view_all_link != blank -%}
+      <a class="nl-tl" href="{{ view_all_link }}">{{ section.settings.view_all_label | escape }}</a>
+    {%- endif -%}
+  </div>
+
+  <div class="nl-rail" role="list" aria-labelledby="{{ heading_id }}" tabindex="0">
+    {%- if collection != blank and collection.products_count > 0 -%}
+      {%- for product in collection.products limit: section.settings.products_to_show -%}
+        {%- render 'nl-card-product',
+          card_product: product,
+          section_id: section.id,
+          quick_add: section.settings.quick_add,
+          show_shade: section.settings.show_shade,
+          show_video: section.settings.show_video,
+          product_view_context: 'list'
+        -%}
+      {%- endfor -%}
+    {%- else -%}
+      {%- comment -%} Onboarding placeholders until a collection is selected. {%- endcomment -%}
+      {%- assign placeholders = 'Cocoa|#5E3B2E|Bestseller,Onyx|#1C1716|New,Rose Clay|#B98680|Save 20%,Milk|#EDE6DD|Bestseller' | split: ',' -%}
+      {%- for item in placeholders -%}
+        {%- assign parts = item | split: '|' -%}
+        <div class="nl-card" role="listitem">
+          <span class="nl-card__media">
+            <span class="nl-card__bottle">
+              {%- render 'nl-bottle', shade: parts[1], width: '100%', cap_width: '44%', cap_radius: true, label_size: 7, variant: 'card' -%}
+            </span>
+            <span class="nl-card__drop" aria-hidden="true"><span class="nl-loop" style="background: {{ parts[1] }};"></span></span>
+            <span class="nl-lbl nl-badge nl-card__badge"><span class="nl-badge__marker" style="background: var(--nl-marker-new);"></span>{{ parts[2] }}</span>
+          </span>
+          <div class="nl-card__info">
+            <div class="nl-card__names">
+              <h3 class="nl-card__title">{{ parts[0] }}</h3>
+              <span class="nl-card__sub">Gel Colour · 10ml</span>
+            </div>
+            <div class="nl-card__price"><span class="nl-card__price-now">{{ 1400 | money }}</span></div>
+          </div>
+          <button class="nl-btn nl-btn--outline nl-btn--small nl-btn--full" type="button" disabled>
+            {{- 'nailogy.product.add' | t -}}
+          </button>
+        </div>
+      {%- endfor -%}
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "NL Product carousel",
+  "tag": "section",
+  "class": "nl-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label",
+      "default": "Gel polish"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Bestselling shades"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 2,
+      "max": 16,
+      "step": 1,
+      "label": "Maximum products to show",
+      "default": 8
+    },
+    {
+      "type": "text",
+      "id": "view_all_label",
+      "label": "View all label",
+      "default": "View all"
+    },
+    {
+      "type": "url",
+      "id": "view_all_link",
+      "label": "View all link",
+      "info": "Defaults to the selected collection."
+    },
+    {
+      "type": "header",
+      "content": "Product cards"
+    },
+    {
+      "type": "checkbox",
+      "id": "quick_add",
+      "label": "Show add to basket button",
+      "default": true,
+      "info": "Products with several variants open Dawn's quick-add options window."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_shade",
+      "label": "Show shade drop",
+      "default": true,
+      "info": "Uses the product metafield custom.shade (colour)."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_video",
+      "label": "Show Video tag on products with video",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 56
+    }
+  ],
+  "presets": [
+    {
+      "name": "NL Product carousel"
+    }
+  ]
+}
+{% endschema %}

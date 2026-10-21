@@ -1,0 +1,68 @@
+<div class="nl-s nl-wrap nl-sec nl-statement" style="text-align: {{ section.settings.alignment }};">
+  {%- if section.settings.label != blank -%}
+    <span class="nl-lbl">{{ section.settings.label | escape }}</span>
+  {%- endif -%}
+  {%- if section.settings.heading != blank -%}
+    <h2 class="nl-h nl-statement__heading">{{ section.settings.heading | escape }}</h2>
+  {%- endif -%}
+  {%- if section.settings.text != blank -%}
+    <div class="nl-statement__text nl-rte">{{ section.settings.text }}</div>
+  {%- endif -%}
+  {%- if section.settings.link_label != blank -%}
+    <a class="nl-tl" href="{{ section.settings.link | default: '#' }}">{{ section.settings.link_label | escape }}</a>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "NL Brand statement",
+  "tag": "section",
+  "class": "nl-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label",
+      "default": "Our approach"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Salon results, at your own pace"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>We make professional gel systems for the kitchen table as much as the salon chair. Considered formulas, honest shades and step-by-step guidance, so a manicure that lasts three weeks feels calm rather than complicated.</p>"
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "Link label",
+      "default": "Read our story"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Link"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Alignment",
+      "default": "center",
+      "options": [
+        { "value": "center", "label": "Centre" },
+        { "value": "left", "label": "Left" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "NL Brand statement"
+    }
+  ]
+}
+{% endschema %}

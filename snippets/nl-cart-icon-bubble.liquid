@@ -1,0 +1,14 @@
+{% comment %}
+  Basket icon with item count for the header. Re-rendered by Dawn's cart JS
+  through sections/cart-icon-bubble.liquid, so markup must stay in sync with it.
+
+  Usage:
+  {% render 'nl-cart-icon-bubble' %}
+{% endcomment %}
+{%- render 'nl-icon', icon: 'basket' -%}
+<span class="visually-hidden">{{ 'nailogy.header.basket_label' | t: count: cart.item_count }}</span>
+{%- if cart.item_count > 0 -%}
+  <span class="nl-header__count" aria-hidden="true">
+    {%- if cart.item_count < 100 -%}{{ cart.item_count }}{%- else -%}99+{%- endif -%}
+  </span>
+{%- endif -%}

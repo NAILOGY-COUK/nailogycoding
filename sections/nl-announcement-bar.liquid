@@ -1,0 +1,53 @@
+{%- liquid
+  assign bg = section.settings.background | default: settings.nl_color_walnut
+  assign fg = section.settings.text_color | default: settings.nl_color_on_dark
+-%}
+{%- if section.settings.text != blank -%}
+  <div class="nl-s nl-service-bar nl-lbl" style="background: {{ bg }}; color: {{ fg }};">
+    {%- if section.settings.link != blank -%}
+      <a href="{{ section.settings.link }}">{{ section.settings.text }}</a>
+    {%- else -%}
+      {{ section.settings.text }}
+    {%- endif -%}
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "NL Service bar",
+  "class": "nl-service-bar-section",
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "Free UK delivery over £40 · Dispatched within one working day"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Link"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background",
+      "info": "Leave empty to use Deep Walnut from the design tokens."
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text colour",
+      "info": "Leave empty to use Text on dark from the design tokens."
+    }
+  ],
+  "enabled_on": {
+    "groups": ["header"]
+  },
+  "presets": [
+    {
+      "name": "NL Service bar"
+    }
+  ]
+}
+{% endschema %}

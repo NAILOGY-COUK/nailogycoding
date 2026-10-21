@@ -1,0 +1,269 @@
+{%- liquid
+  assign menu = section.settings.menu
+  assign highlight = section.settings.highlight_title | strip | downcase
+-%}
+
+<header class="nl-s nl-header">
+  <div class="nl-wrap nl-header__bar">
+    <div class="nl-header__left">
+      {%- if menu != blank -%}
+        <button
+          type="button"
+          class="nl-ib nl-mob nl-mnav__toggle"
+          aria-expanded="false"
+          aria-controls="NlMobileNav-{{ section.id }}"
+          aria-label="{{ 'nailogy.header.open_menu' | t }}"
+          data-label-open="{{ 'nailogy.header.open_menu' | t }}"
+          data-label-close="{{ 'nailogy.header.close_menu' | t }}"
+          data-nl-mnav-toggle
+        >
+          {%- render 'nl-icon', icon: 'menu' -%}
+        </button>
+      {%- endif -%}
+      {% render 'nl-header-search', input_id: 'Search-In-Modal' %}
+    </div>
+
+    <a href="{{ routes.root_url }}" class="nl-header__logo" aria-label="{{ 'nailogy.header.home' | t: shop: shop.name | escape }}">
+      {%- if section.settings.logo != blank -%}
+        {%- assign logo_height = section.settings.logo_width | divided_by: section.settings.logo.aspect_ratio | round -%}
+        {{
+          section.settings.logo
+          | image_url: width: 600
+          | image_tag:
+            class: 'nl-header__logo-img',
+            widths: '150, 300, 450, 600',
+            height: logo_height,
+            width: section.settings.logo_width,
+            alt: shop.name,
+            loading: 'eager'
+        }}
+      {%- else -%}
+        {{ section.settings.logo_text | default: shop.name | escape }}
+      {%- endif -%}
+    </a>
+
+    <div class="nl-header__right">
+      {%- if shop.customer_accounts_enabled -%}
+        <shopify-account
+          menu="{{ settings.customer_account_menu | default: 'customer-account-main-menu' }}"
+          class="nl-ib nl-header__account"
+        >
+          <span slot="signed-out-avatar" class="nl-header__account-icon">{% render 'nl-icon', icon: 'account' %}</span>
+          <span slot="signed-out-avatar" class="visually-hidden">{{ 'customer.log_in' | t }}</span>
+        </shopify-account>
+      {%- endif -%}
+
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when '@app' -%}
+            {% render block %}
+        {%- endcase -%}
+      {%- endfor -%}
+
+      <a href="{{ routes.cart_url }}" class="nl-ib nl-header__basket" id="cart-icon-bubble">
+        {%- render 'nl-cart-icon-bubble' -%}
+      </a>
+    </div>
+  </div>
+
+  {%- if menu != blank -%}
+  <nav id="NlMobileNav-{{ section.id }}" class="nl-mnav__panel nl-mob" hidden aria-label="{{ section.settings.nav_label | escape }}">
+    <ul class="list-unstyled nl-mnav__list" role="list">
+      {%- for link in menu.links -%}
+        <li class="nl-mnav__item">
+          {%- if link.links != blank -%}
+            <details class="nl-mnav__sub">
+              <summary class="nl-mnav__link">
+                {{- link.title | escape -}}
+                <span class="nl-mnav__caret" aria-hidden="true"></span>
+              </summary>
+              <ul class="list-unstyled" role="list">
+                <li>
+                  <a class="nl-mnav__link nl-mnav__link--child" href="{{ link.url }}">{{ link.title | escape }}</a>
+                </li>
+                {%- for child in link.links -%}
+                  <li>
+                    <a
+                      class="nl-mnav__link nl-mnav__link--child"
+                      href="{{ child.url }}"
+                      {% if child.current %}
+                        aria-current="page"
+                      {% endif %}
+                    >
+                      {{- child.title | escape -}}
+                    </a>
+                  </li>
+                {%- endfor -%}
+              </ul>
+            </details>
+          {%- else -%}
+            <a
+              class="nl-mnav__link"
+              href="{{ link.url }}"
+              {% if link.current %}
+                aria-current="page"
+              {% endif %}
+            >
+              {{- link.title | escape -}}
+            </a>
+          {%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ul>
+  </nav>
+  {%- endif -%}
+
+  {%- if menu != blank -%}
+    <nav class="nl-nav nl-wrap" aria-label="{{ section.settings.nav_label | escape }}">
+      <ul class="list-unstyled nl-nav__list" role="list">
+        {%- for link in menu.links -%}
+          {%- assign link_title = link.title | strip | downcase -%}
+          <li class="nl-nav__item">
+            {%- if link.links != blank -%}
+              <header-menu>
+                <details id="NlNav-{{ section.id }}-{{ forloop.index }}" class="nl-nav__dd">
+                  <summary class="nl-nav__link">
+                    {%- if highlight != blank and link_title == highlight -%}
+                      <span class="nl-nav__marker" aria-hidden="true"></span>
+                    {%- endif -%}
+                    {{- link.title | escape -}}
+                    <span class="nl-nav__caret" aria-hidden="true"></span>
+                  </summary>
+                  <ul class="list-unstyled nl-nav__panel" role="list">
+                    {%- for child in link.links -%}
+                      <li>
+                        <a
+                          class="nl-nav__child"
+                          href="{{ child.url }}"
+                          {% if child.current %}
+                            aria-current="page"
+                          {% endif %}
+                        >
+                          {{- child.title | escape -}}
+                        </a>
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                </details>
+              </header-menu>
+            {%- else -%}
+              <a
+                class="nl-nav__link"
+                href="{{ link.url }}"
+                {% if link.current %}
+                  aria-current="page"
+                {% endif %}
+              >
+                {%- if highlight != blank and link_title == highlight -%}
+                  <span class="nl-nav__marker" aria-hidden="true"></span>
+                {%- endif -%}
+                {{- link.title | escape -}}
+              </a>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ul>
+    </nav>
+  {%- endif -%}
+</header>
+
+<style>
+  .nl-nav__marker { background: {{ section.settings.highlight_color }}; }
+</style>
+
+{% javascript %}
+  (() => {
+    document.querySelectorAll('[data-nl-mnav-toggle]').forEach((toggle) => {
+      const panel = document.getElementById(toggle.getAttribute('aria-controls'));
+      if (!panel) return;
+      const set = (open) => {
+        panel.hidden = !open;
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        toggle.setAttribute('aria-label', open ? toggle.dataset.labelClose : toggle.dataset.labelOpen);
+      };
+      toggle.addEventListener('click', () => set(panel.hidden));
+      panel.addEventListener('keyup', (event) => {
+        if (event.code && event.code.toUpperCase() === 'ESCAPE') {
+          set(false);
+          toggle.focus();
+        }
+      });
+      window.matchMedia('(min-width: 900px)').addEventListener('change', (event) => {
+        if (event.matches) set(false);
+      });
+    });
+  })();
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "NL Header",
+  "class": "nl-header-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Logo"
+    },
+    {
+      "type": "text",
+      "id": "logo_text",
+      "label": "Logo text",
+      "default": "NAILOGY",
+      "info": "Used when no logo image is selected."
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "min": 60,
+      "max": 240,
+      "step": 4,
+      "unit": "px",
+      "label": "Logo image width",
+      "default": 140
+    },
+    {
+      "type": "header",
+      "content": "Navigation"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "main-menu",
+      "info": "Items with child links open a dropdown on desktop and expand in the mobile menu."
+    },
+    {
+      "type": "text",
+      "id": "nav_label",
+      "label": "Navigation name for screen readers",
+      "default": "Main"
+    },
+    {
+      "type": "text",
+      "id": "highlight_title",
+      "label": "Highlighted menu item",
+      "default": "Academy",
+      "info": "Shows a small marker before this menu item on desktop. Must match the menu item title."
+    },
+    {
+      "type": "color",
+      "id": "highlight_color",
+      "label": "Marker colour",
+      "default": "#8A8666"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@app"
+    }
+  ],
+  "enabled_on": {
+    "groups": ["header"]
+  }
+}
+{% endschema %}

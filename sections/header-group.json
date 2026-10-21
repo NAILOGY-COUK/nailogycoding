@@ -1,0 +1,30 @@
+{
+  "name": "t:sections.header.name",
+  "type": "header",
+  "sections": {
+    "service-bar": {
+      "type": "nl-announcement-bar",
+      "settings": {
+        "text": "Free UK delivery over £40 · Dispatched within one working day",
+        "link": "",
+        "background": "",
+        "text_color": ""
+      }
+    },
+    "header": {
+      "type": "nl-header",
+      "settings": {
+        "logo_text": "NAILOGY",
+        "logo_width": 140,
+        "menu": "main-menu",
+        "nav_label": "Main",
+        "highlight_title": "Academy",
+        "highlight_color": "#8A8666"
+      }
+    }
+  },
+  "order": [
+    "service-bar",
+    "header"
+  ]
+}

@@ -1,0 +1,59 @@
+{% comment %}
+  Email signup using Shopify's customer form (creates a subscribed customer with tags).
+  After submitting, Shopify reloads the page with the form id as URL hash, so only
+  the form that was actually used shows its success message (see .nl-signup in nailogy.css).
+
+  Accepts:
+  - form_id: {String} Unique id, e.g. 'NlNewsletter-' | append: section.id (required)
+  - tags: {String} Comma separated customer tags (required)
+  - placeholder: {String} Input placeholder
+  - button_label: {String} Submit button label
+  - button_class: {String} Extra button classes, e.g. 'nl-btn--light'
+  - success_text: {String} Message after a successful signup
+
+  Usage:
+  {% render 'nl-signup-form', form_id: 'NlNewsletter', tags: 'newsletter', button_label: 'Sign up' %}
+{% endcomment %}
+{%- liquid
+  if success_text == blank
+    assign success_text = 'nailogy.newsletter.success' | t
+  endif
+  if placeholder == blank
+    assign placeholder = 'nailogy.newsletter.placeholder' | t
+  endif
+-%}
+{%- form 'customer', id: form_id, class: 'nl-signup' -%}
+  <input type="hidden" name="contact[tags]" value="{{ tags | escape }}">
+  {%- if form.posted_successfully? -%}
+    <p class="nl-form-status nl-signup__success" role="status">
+      {%- render 'nl-icon', icon: 'check', px: 20 -%}
+      {{- success_text -}}
+    </p>
+  {%- endif -%}
+  <div class="nl-form nl-signup__fields{% if form.posted_successfully? %} nl-signup__fields--posted{% endif %}">
+    <label for="{{ form_id }}-email" class="visually-hidden">{{ 'nailogy.newsletter.email_label' | t }}</label>
+    <input
+      id="{{ form_id }}-email"
+      class="nl-inp nl-form__input"
+      type="email"
+      name="contact[email]"
+      value="{{ form.email }}"
+      autocorrect="off"
+      autocapitalize="off"
+      autocomplete="email"
+      placeholder="{{ placeholder | escape }}"
+      required
+      {% if form.errors %}
+        aria-invalid="true"
+        aria-describedby="{{ form_id }}-error"
+      {% endif %}
+    >
+    <button class="nl-btn {{ button_class }}" type="submit" name="commit">{{ button_label | escape }}</button>
+  </div>
+  {%- if form.errors -%}
+    <p class="nl-form-error" id="{{ form_id }}-error" role="alert">
+      {{- form.errors.translated_fields.email | capitalize }}
+      {{ form.errors.messages.email -}}
+    </p>
+  {%- endif -%}
+{%- endform -%}
