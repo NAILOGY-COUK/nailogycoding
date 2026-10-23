@@ -6,7 +6,19 @@
   <div class="nl-wrap nl-footer__inner">
     <div class="nl-foot">
       <div class="nl-foot__brand">
-        <span class="nl-footer__logo">{{ section.settings.logo_text | default: shop.name | escape }}</span>
+        {%- if section.settings.use_brand_logo -%}
+          {%- assign logo_height = section.settings.logo_width | divided_by: 5.138 | round -%}
+          <img
+            class="nl-footer__logo-img"
+            src="{{ 'nl-logo.svg' | asset_url }}"
+            alt="{{ shop.name | escape }}"
+            width="{{ section.settings.logo_width }}"
+            height="{{ logo_height }}"
+            loading="lazy"
+          >
+        {%- else -%}
+          <span class="nl-footer__logo">{{ section.settings.logo_text | default: shop.name | escape }}</span>
+        {%- endif -%}
         {%- if section.settings.text != blank -%}
           <p class="nl-footer__text">{{ section.settings.text }}</p>
         {%- endif -%}
@@ -107,10 +119,28 @@
   "class": "nl-footer-section",
   "settings": [
     {
+      "type": "checkbox",
+      "id": "use_brand_logo",
+      "label": "Use NAILOGY logo",
+      "default": true,
+      "info": "Shown in white on the dark footer."
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "min": 60,
+      "max": 300,
+      "step": 5,
+      "unit": "px",
+      "label": "Logo width",
+      "default": 150
+    },
+    {
       "type": "text",
       "id": "logo_text",
       "label": "Logo text",
-      "default": "NAILOGY"
+      "default": "NAILOGY",
+      "info": "Used when the NAILOGY logo is turned off."
     },
     {
       "type": "inline_richtext",
@@ -180,7 +210,9 @@
   ],
   "max_blocks": 4,
   "enabled_on": {
-    "groups": ["footer"]
+    "groups": [
+      "footer"
+    ]
   }
 }
 {% endschema %}

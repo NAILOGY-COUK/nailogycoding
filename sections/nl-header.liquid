@@ -23,7 +23,7 @@
       {% render 'nl-header-search', input_id: 'Search-In-Modal' %}
     </div>
 
-    <a href="{{ routes.root_url }}" class="nl-header__logo" aria-label="{{ 'nailogy.header.home' | t: shop: shop.name | escape }}">
+    <a href="{{ routes.root_url }}" class="nl-header__logo{% if section.settings.logo != blank or section.settings.use_brand_logo %} nl-header__logo--image{% endif %}" aria-label="{{ 'nailogy.header.home' | t: shop: shop.name | escape }}">
       {%- if section.settings.logo != blank -%}
         {%- assign logo_height = section.settings.logo_width | divided_by: section.settings.logo.aspect_ratio | round -%}
         {{
@@ -37,6 +37,16 @@
             alt: shop.name,
             loading: 'eager'
         }}
+      {%- elsif section.settings.use_brand_logo -%}
+        {%- assign logo_height = section.settings.logo_width | divided_by: 5.138 | round -%}
+        <img
+          class="nl-header__logo-img"
+          src="{{ 'nl-logo.svg' | asset_url }}"
+          alt=""
+          width="{{ section.settings.logo_width }}"
+          height="{{ logo_height }}"
+          loading="eager"
+        >
       {%- else -%}
         {{ section.settings.logo_text | default: shop.name | escape }}
       {%- endif -%}
@@ -205,11 +215,18 @@
       "content": "Logo"
     },
     {
+      "type": "checkbox",
+      "id": "use_brand_logo",
+      "label": "Use NAILOGY logo",
+      "default": true,
+      "info": "Used when no logo image is selected above. Shown in Deep Walnut."
+    },
+    {
       "type": "text",
       "id": "logo_text",
       "label": "Logo text",
       "default": "NAILOGY",
-      "info": "Used when no logo image is selected."
+      "info": "Used when no logo image is selected and the NAILOGY logo is turned off."
     },
     {
       "type": "image_picker",
@@ -220,11 +237,11 @@
       "type": "range",
       "id": "logo_width",
       "min": 60,
-      "max": 240,
-      "step": 4,
+      "max": 300,
+      "step": 5,
       "unit": "px",
-      "label": "Logo image width",
-      "default": 140
+      "label": "Logo width",
+      "default": 150
     },
     {
       "type": "header",
@@ -263,7 +280,9 @@
     }
   ],
   "enabled_on": {
-    "groups": ["header"]
+    "groups": [
+      "header"
+    ]
   }
 }
 {% endschema %}

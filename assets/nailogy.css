@@ -549,10 +549,16 @@ body.nl [class*='color-scheme-'] {
   color: var(--nl-walnut);
 }
 
+.nl-header__logo--image {
+  display: block;
+  padding-left: 0;
+  line-height: 0;
+}
+
 .nl-header__logo-img {
   display: block;
   height: auto;
-  max-width: 100%;
+  max-width: min(100%, 46vw);
 }
 
 .nl-header__count {
@@ -1650,6 +1656,13 @@ span.nl-academy__play {
   font-weight: 600;
   font-size: 20px;
   letter-spacing: 0.34em;
+}
+
+.nl-footer__logo-img {
+  display: block;
+  height: auto;
+  max-width: 100%;
+  filter: brightness(0) invert(1);
 }
 
 .nl-footer__text {
