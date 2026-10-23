@@ -22,7 +22,6 @@
             "button_label": "Shop now",
             "button_link": "shopify://collections/gel-polish",
             "art": "image",
-            "image": "shopify://shop_images/photo_2_2026-10-20_23-02-17.jpg",
             "image_alt": "Hand resting on white linen, nails in a soft nude gel",
             "shade_1": "#ede6dd",
             "shade_2": "#d8c0a3",
@@ -125,7 +124,6 @@
             "heading": "Join the Academy",
             "link_label": "Find out more",
             "art": "image",
-            "image": "shopify://shop_images/photo_3_2026-10-20_23-02-17.jpg",
             "shade_1": "#5e3b2e",
             "shade_2": "#1c1716",
             "shade_3": "#b98680",
@@ -497,8 +495,8 @@
           "settings": {
             "color": "#e4dccb",
             "link": "",
-            "sample": "nl-demo-hand",
-            "sample_position": "20% 80%"
+            "sample": "nl-demo-plum",
+            "sample_position": "50% 50%"
           }
         },
         "ig-6": {

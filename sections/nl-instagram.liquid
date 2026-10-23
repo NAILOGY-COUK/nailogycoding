@@ -40,12 +40,12 @@
               }}
             {%- elsif block.settings.sample != 'none' -%}
               {%- liquid
-                if block.settings.sample == 'nl-demo-hand'
-                  assign sample_w = 1290
-                  assign sample_h = 1219
+                if block.settings.sample == 'nl-demo-hand' or block.settings.sample == 'nl-demo-pink'
+                  assign sample_w = 1200
+                  assign sample_h = 1600
                 else
-                  assign sample_w = 739
-                  assign sample_h = 415
+                  assign sample_w = 1080
+                  assign sample_h = 1919
                 endif
               -%}
               <img
@@ -126,8 +126,10 @@
           "default": "none",
           "options": [
             { "value": "none", "label": "None" },
-            { "value": "nl-demo-hand", "label": "Hand" },
-            { "value": "nl-demo-fur", "label": "Texture" }
+            { "value": "nl-demo-hand", "label": "Nude manicure" },
+            { "value": "nl-demo-fur", "label": "Plum manicure" },
+            { "value": "nl-demo-plum", "label": "Plum manicure 2" },
+            { "value": "nl-demo-pink", "label": "Pink manicure" }
           ]
         },
         {
@@ -148,7 +150,7 @@
         { "type": "tile", "settings": { "color": "#B98680" } },
         { "type": "tile", "settings": { "color": "#5E3B2E" } },
         { "type": "tile", "settings": { "sample": "nl-demo-fur" } },
-        { "type": "tile", "settings": { "sample": "nl-demo-hand", "sample_position": "20% 80%" } },
+        { "type": "tile", "settings": { "sample": "nl-demo-plum" } },
         { "type": "tile", "settings": { "color": "#C08A6B" } }
       ]
     }
