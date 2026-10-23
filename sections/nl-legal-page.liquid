@@ -1,0 +1,38 @@
+<div class="nl-s nl-wrap nl-sec nl-legal">
+  {%- if section.settings.heading != blank -%}
+    <h1 class="nl-h nl-legal__heading">{{ section.settings.heading | escape }}</h1>
+  {%- endif -%}
+  <div class="nl-legal__body">
+    {{ section.settings.content }}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "NL Legal page",
+  "tag": "section",
+  "class": "nl-section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "For policy pages such as Terms & Conditions. Headings (h2), paragraphs, bullet lists and links are styled automatically."
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Terms & Conditions"
+    },
+    {
+      "type": "html",
+      "id": "content",
+      "label": "Content (HTML)"
+    }
+  ],
+  "presets": [
+    {
+      "name": "NL Legal page"
+    }
+  ]
+}
+{% endschema %}

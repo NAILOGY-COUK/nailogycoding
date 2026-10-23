@@ -592,7 +592,9 @@
     "footer": {
       "currency": "Currency",
       "payment_methods": "Payment methods",
-      "update": "Update"
+      "update": "Update",
+      "terms": "Terms & Conditions",
+      "refunds": "Refunds & Returns"
     }
   }
 }

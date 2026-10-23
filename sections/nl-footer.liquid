@@ -108,6 +108,13 @@
             {%- endif -%}
           {%- endfor -%}
         {%- endif -%}
+        {%- comment -%} Theme-built policy pages (templates/index.terms.json, index.refunds.json), hidden once the Shopify policy exists. {%- endcomment -%}
+        {%- if shop.terms_of_service == blank -%}
+          <a href="{{ routes.root_url }}?view=terms">{{ 'nailogy.footer.terms' | t }}</a>
+        {%- endif -%}
+        {%- if shop.refund_policy == blank -%}
+          <a href="{{ routes.root_url }}?view=refunds">{{ 'nailogy.footer.refunds' | t }}</a>
+        {%- endif -%}
       </span>
     </div>
   </div>
