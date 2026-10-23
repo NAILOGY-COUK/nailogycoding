@@ -1709,6 +1709,28 @@ span.nl-academy__play {
   text-decoration: none;
 }
 
+/* Long menus (7+ links) flow into two columns */
+.nl-footer__col--split {
+  grid-column: 1 / -1;
+}
+
+.nl-footer__col--split .nl-footer__links {
+  display: block;
+  columns: 2;
+  column-gap: 32px;
+}
+
+.nl-footer__col--split .nl-footer__links li {
+  break-inside: avoid;
+  padding-bottom: 10px;
+}
+
+@media screen and (min-width: 900px) {
+  .nl-footer__col--split {
+    grid-column: span 2;
+  }
+}
+
 .nl-footer__links a:hover,
 .nl-footer__links a[aria-current='page'] {
   text-decoration: underline;

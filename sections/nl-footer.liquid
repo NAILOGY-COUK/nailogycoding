@@ -36,7 +36,7 @@
 
       {%- for block in section.blocks -%}
         {%- if block.settings.menu != blank -%}
-          <nav class="nl-footer__col" aria-label="{{ block.settings.heading | default: block.settings.menu.title | escape }}" {{ block.shopify_attributes }}>
+          <nav class="nl-footer__col{% if block.settings.menu.links.size > 6 %} nl-footer__col--split{% endif %}" aria-label="{{ block.settings.heading | default: block.settings.menu.title | escape }}" {{ block.shopify_attributes }}>
             <h2 class="nl-lbl nl-footer__heading">{{ block.settings.heading | default: block.settings.menu.title | escape }}</h2>
             <ul class="list-unstyled nl-footer__links" role="list">
               {%- for link in block.settings.menu.links -%}
