@@ -14,18 +14,11 @@
     "footer": {
       "type": "nl-footer",
       "blocks": {
-        "menu_zQL34g": {
-          "type": "menu",
-          "settings": {
-            "heading": "",
-            "menu": "footer"
-          }
-        },
         "menu-1": {
           "type": "menu",
           "settings": {
             "heading": "Shop",
-            "menu": ""
+            "menu": "main-menu"
           }
         },
         "menu-2": {
@@ -44,7 +37,6 @@
         }
       },
       "block_order": [
-        "menu_zQL34g",
         "menu-1",
         "menu-2",
         "menu-3"
