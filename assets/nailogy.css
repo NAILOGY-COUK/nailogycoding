@@ -670,7 +670,8 @@ shopify-account.nl-header__account:not(:defined) {
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  column-gap: 32px;
+  /* 32px on wide screens, tightening on smaller laptops so long menus stay on one line */
+  column-gap: clamp(12px, calc((100vw - 1000px) / 14), 32px);
   min-height: 43px;
 }
 
@@ -687,6 +688,7 @@ shopify-account.nl-header__account:not(:defined) {
   font-size: 14px;
   font-weight: 600;
   line-height: 1.6;
+  white-space: nowrap;
   text-decoration: none;
   color: var(--nl-walnut);
   cursor: pointer;
@@ -722,12 +724,23 @@ details[open] > summary .nl-mnav__caret {
   transform: translateY(1px) rotate(-135deg);
 }
 
+.nl-nav__dd {
+  display: flex;
+  align-items: center;
+}
+
+.nl-nav__dd > summary {
+  line-height: 1.6;
+}
+
 .nl-nav__panel {
   position: absolute;
   top: calc(100% + 10px);
   left: -20px;
   z-index: 3;
   min-width: 220px;
+  max-width: 320px;
+  width: max-content;
   padding: 12px 0;
   background: var(--nl-parchment);
   border: 1px solid var(--nl-line);
@@ -796,9 +809,41 @@ details[open] > summary .nl-mnav__caret {
   border-top: 1px solid var(--nl-line);
 }
 
+/* Drop-downs of the last items open towards the left so they never leave the screen */
+.nl-nav__item:nth-last-child(-n + 3) .nl-nav__panel {
+  left: auto;
+  right: -20px;
+}
+
 @media screen and (min-width: 900px) {
   .nl-nav {
     display: block;
+  }
+}
+
+/* Long menus don't fit next to each other below 1100px: use the mobile menu (☰) there */
+@media screen and (min-width: 900px) and (max-width: 1099px) {
+  .nl-header .nl-mnav__toggle.nl-mob {
+    display: inline-flex !important;
+  }
+
+  .nl-header .nl-mnav__panel.nl-mob:not([hidden]) {
+    display: flex !important;
+  }
+
+  .nl-header .nl-nav {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 1100px) and (max-width: 1199px) {
+  .nl-nav__link {
+    font-size: 13px;
+  }
+
+  .nl-nav__caret {
+    width: 5px;
+    height: 5px;
   }
 }
 

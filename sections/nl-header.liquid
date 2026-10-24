@@ -88,9 +88,12 @@
                 <span class="nl-mnav__caret" aria-hidden="true"></span>
               </summary>
               <ul class="list-unstyled" role="list">
-                <li>
-                  <a class="nl-mnav__link nl-mnav__link--child" href="{{ link.url }}">{{ link.title | escape }}</a>
-                </li>
+                {%- capture has_all -%}{%- render 'nl-menu-has-all', link: link -%}{%- endcapture -%}
+                {%- unless has_all contains 'yes' -%}
+                  <li>
+                    <a class="nl-mnav__link nl-mnav__link--child" href="{{ link.url }}">{{ link.title | escape }}</a>
+                  </li>
+                {%- endunless -%}
                 {%- for child in link.links -%}
                   <li>
                     <a
@@ -140,6 +143,12 @@
                     <span class="nl-nav__caret" aria-hidden="true"></span>
                   </summary>
                   <ul class="list-unstyled nl-nav__panel" role="list">
+                    {%- capture has_all -%}{%- render 'nl-menu-has-all', link: link -%}{%- endcapture -%}
+                    {%- unless has_all contains 'yes' -%}
+                      <li>
+                        <a class="nl-nav__child" href="{{ link.url }}">{{ link.title | escape }}</a>
+                      </li>
+                    {%- endunless -%}
                     {%- for child in link.links -%}
                       <li>
                         <a
@@ -198,7 +207,7 @@
           toggle.focus();
         }
       });
-      window.matchMedia('(min-width: 900px)').addEventListener('change', (event) => {
+      window.matchMedia('(min-width: 1100px)').addEventListener('change', (event) => {
         if (event.matches) set(false);
       });
     });

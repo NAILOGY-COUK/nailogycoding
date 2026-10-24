@@ -1,0 +1,14 @@
+{% comment %}
+  Outputs "yes" when a menu item already has its own "All …" child link (e.g. "All Gel Products"),
+  so the header doesn't add a second link to the parent category.
+
+  Accepts:
+  - link: {Object} Menu link with child links (required)
+
+  Usage:
+  {%- capture has_all -%}{%- render 'nl-menu-has-all', link: link -%}{%- endcapture -%}
+{% endcomment %}
+{%- for child in link.links -%}
+  {%- assign first_word = child.title | strip | split: ' ' | first | downcase -%}
+  {%- if first_word == 'all' or child.url == link.url -%}yes{%- break -%}{%- endif -%}
+{%- endfor -%}
