@@ -54,7 +54,7 @@
             "heading": "Gifting, quietly done",
             "text": "Four curated shades in a recycled-card box, ready to give.",
             "button_label": "Shop now",
-            "button_link": "shopify://collections/gift-sets",
+            "button_link": "shopify://collections/salon-essentials",
             "art": "swatches",
             "image_alt": "Hand resting on white linen, nails in a soft nude gel",
             "shade_1": "#5e3b2e",
@@ -100,7 +100,7 @@
         "tile-2": {
           "type": "tile",
           "settings": {
-            "link": "shopify://collections/nail-care",
+            "link": "shopify://collections/spa-cuticle-oil",
             "label": "Nail care",
             "show_marker": false,
             "marker_color": "#8a8666",
@@ -245,7 +245,7 @@
           "type": "panel",
           "settings": {
             "product": "",
-            "link": "shopify://collections/gift-sets",
+            "link": "shopify://collections/salon-essentials",
             "label": "Gift set",
             "show_marker": false,
             "marker_color": "#b9704d",
@@ -264,7 +264,7 @@
           "type": "panel",
           "settings": {
             "product": "",
-            "link": "shopify://collections/nail-care",
+            "link": "shopify://collections/spa-cuticle-oil",
             "label": "Care",
             "show_marker": true,
             "marker_color": "#8a8666",
