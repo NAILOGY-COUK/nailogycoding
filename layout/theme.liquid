@@ -343,7 +343,18 @@
       tabindex="-1"
       data-template="{{ template.name }}"
     >
-      {{ content_for_layout }}
+      {%- if request.page_type == 'policy' -%}
+        {%- comment -%} Shopify-generated policies still carry the old contact details; correct them here. {%- endcomment -%}
+        {{
+          content_for_layout
+          | replace: ' or contact us at Image Court, 34, Romford RM7 0FJ, United Kingdom', ''
+          | replace: 'please call  or email', 'please email'
+          | replace: 'please call or email', 'please email'
+          | replace: 'nailogycouk@gmail.com', 'info@nailogy.co.uk'
+        }}
+      {%- else -%}
+        {{ content_for_layout }}
+      {%- endif -%}
     </main>
 
     {% sections 'footer-group' %}
