@@ -441,6 +441,7 @@
         "review-2",
         "review-3"
       ],
+      "disabled": true,
       "settings": {
         "label": "Reviews",
         "heading": "Loved at home",
