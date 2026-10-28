@@ -15,16 +15,56 @@
       <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
     {%- endunless -%}
 
-    <title>
-      {{ page_title }}
-      {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
-      {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
-      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
-    </title>
+    {%- if request.page_type == 'index' -%}
+      {%- comment -%} Homepage title and description written for search; the admin values are generic. {%- endcomment -%}
+      <title>Nailogy – Professional Nail Supplies UK | Gel Polish &amp; Builder Gel</title>
+      <meta name="description" content="Nailogy: professional nail supplies for UK nail techs and salons – DARK gel polish, builder gel, polygel, e-file bits and UV/LED lamps. Free UK delivery over £150.">
+      <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "OnlineStore",
+              "@id": "{{ request.origin }}/#organization",
+              "name": "Nailogy",
+              "alternateName": "Nailogy UK",
+              "url": "{{ request.origin }}/",
+              "email": "info@nailogy.co.uk",
+              "description": "Professional nail supplies for nail technicians and salons in the UK.",
+              {%- if shop.brand.logo %}"logo": {{ shop.brand.logo | image_url: width: 600 | prepend: 'https:' | json }},{% endif %}
+              "areaServed": "GB",
+              "sameAs": [
+                {%- if settings.social_instagram_link != blank %}{{ settings.social_instagram_link | json }}{% endif -%}
+                {%- if settings.social_instagram_link != blank and settings.social_facebook_link != blank %},{% endif -%}
+                {%- if settings.social_facebook_link != blank %}{{ settings.social_facebook_link | json }}{% endif -%}
+              ]
+            },
+            {
+              "@type": "WebSite",
+              "name": "Nailogy",
+              "url": "{{ request.origin }}/",
+              "publisher": { "@id": "{{ request.origin }}/#organization" },
+              "potentialAction": {
+                "@type": "SearchAction",
+                "target": "{{ request.origin }}{{ routes.search_url }}?q={search_term_string}",
+                "query-input": "required name=search_term_string"
+              }
+            }
+          ]
+        }
+      </script>
+    {%- else -%}
+      <title>
+        {{ page_title }}
+        {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
+        {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
+        {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+      </title>
 
-    {% if page_description %}
-      <meta name="description" content="{{ page_description | escape }}">
-    {% endif %}
+      {% if page_description %}
+        <meta name="description" content="{{ page_description | escape }}">
+      {% endif %}
+    {%- endif -%}
 
     {% render 'meta-tags' %}
 
