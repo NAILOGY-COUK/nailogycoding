@@ -98,7 +98,7 @@
           widths: '240, 360, 480, 600, 750, 900',
           sizes: '(min-width: 900px) 25vw, 46vw',
           loading: image_loading,
-          alt: card_product.featured_media.alt
+          alt: card_product.featured_media.alt | default: card_product.title
       }}
     {%- else -%}
       <span class="nl-card__bottle">
