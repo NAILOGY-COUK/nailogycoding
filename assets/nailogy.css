@@ -2489,6 +2489,35 @@ body.nl .product__description p {
   line-height: 1.7;
 }
 
+/* Imported descriptions wrap each list item in a <p>; keep the text beside its bullet. */
+body.nl .product__description ul,
+body.nl .product__description ol {
+  list-style-position: outside;
+  padding-left: 1.4em;
+}
+
+body.nl .product__description li > p {
+  margin: 0;
+}
+
+body.nl .product__description li {
+  margin-bottom: 0.4em;
+}
+
+body.nl .product__description h2,
+body.nl .product__description h3 {
+  font-size: 18px;
+  line-height: 1.5;
+  margin: 0 0 1em;
+}
+
+/* Supplier links are disabled in main-product.liquid; drop their link styling too. */
+body.nl .product__description a:not([href]),
+body.nl .product__description a:not([href]) u {
+  text-decoration: none;
+  color: inherit;
+}
+
 body.nl .product__accordion .accordion__title,
 body.nl .accordion .accordion__title {
   font-family: var(--nl-font-body);

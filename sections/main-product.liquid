@@ -204,7 +204,8 @@
                 {%- when 'description' -%}
                   {%- if product.description != blank -%}
                     <div class="product__description rte quick-add-hidden" {{ block.shopify_attributes }}>
-                      {{ product.description }}
+                      {%- comment -%} Imported descriptions link to the supplier's shop; keep the text, drop the link. {%- endcomment -%}
+                      {{ product.description | replace: 'href="https://darkbyrior.com', 'data-href="https://darkbyrior.com' }}
                     </div>
                   {%- endif -%}
                 {%- when 'sku' -%}
