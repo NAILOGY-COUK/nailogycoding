@@ -1668,8 +1668,8 @@
         "type": "number",
         "id": "nl_free_delivery_threshold",
         "label": "Free delivery threshold",
-        "default": 40,
-        "info": "In your store currency (e.g. 40 = £40). The bar is shown when shoppers browse in the store currency."
+        "default": 150,
+        "info": "In your store currency (e.g. 150 = £150). The bar is shown when shoppers browse in the store currency."
       },
       {
         "type": "text",

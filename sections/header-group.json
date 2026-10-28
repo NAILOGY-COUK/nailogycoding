@@ -14,7 +14,7 @@
     "service-bar": {
       "type": "nl-announcement-bar",
       "settings": {
-        "text": "Free UK delivery over £40 · Dispatched within one working day",
+        "text": "Free UK delivery over £150 · Dispatched within 3–5 working days",
         "link": "",
         "background": "",
         "text_color": ""

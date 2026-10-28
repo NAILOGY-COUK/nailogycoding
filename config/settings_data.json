@@ -191,7 +191,7 @@
           }
         }
       },
-      "nl_free_delivery_threshold": 40
+      "nl_free_delivery_threshold": 150
     }
   }
 }
