@@ -32,7 +32,7 @@
           "type": "menu",
           "settings": {
             "heading": "About",
-            "menu": ""
+            "menu": "about"
           }
         }
       },

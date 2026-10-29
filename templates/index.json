@@ -15,10 +15,10 @@
         "slide-1": {
           "type": "slide",
           "settings": {
-            "label": "New · Autumn edit",
+            "label": "DARK Gel Polish",
             "marker_color": "#b9704d",
-            "heading": "Warm shades for slower days",
-            "text": "Clay, cocoa and fig. Six new gel colours made to wear quietly for up to three weeks.",
+            "heading": "Colour that lasts up to 4 weeks",
+            "text": "Highly pigmented professional gel polish that covers in one to two coats. Explore the DARK shade range.",
             "button_label": "Shop now",
             "button_link": "shopify://collections/gel-polish",
             "art": "image",
@@ -32,12 +32,12 @@
         "slide-2": {
           "type": "slide",
           "settings": {
-            "label": "New · Builder Gel in a Bottle",
+            "label": "Builder Gel in a Bottle",
             "marker_color": "#b9704d",
             "heading": "Strength you can brush on",
-            "text": "A self-levelling builder that adds structure to natural nails. No pots, no files, no fuss.",
+            "text": "DARK Smart Builder Gel strengthens natural nails, levels itself and leaves no sticky layer.",
             "button_label": "Shop now",
-            "button_link": "shopify://collections/builder-gel",
+            "button_link": "shopify://collections/builder-gel-in-a-bottle",
             "art": "bottles",
             "image_alt": "Hand resting on white linen, nails in a soft nude gel",
             "shade_1": "#ede6dd",
@@ -49,10 +49,10 @@
         "slide-3": {
           "type": "slide",
           "settings": {
-            "label": "New · Gift sets",
+            "label": "For nail technicians",
             "marker_color": "#b9704d",
-            "heading": "Gifting, quietly done",
-            "text": "Four curated shades in a recycled-card box, ready to give.",
+            "heading": "Everything for the salon desk",
+            "text": "STALEKS instruments, e-file bits, nitrile gloves, pedicure discs and more, dispatched from the UK.",
             "button_label": "Shop now",
             "button_link": "shopify://collections/salon-essentials",
             "art": "swatches",
@@ -105,7 +105,7 @@
             "label": "Nail care",
             "show_marker": false,
             "marker_color": "#8a8666",
-            "heading": "Oils, serums and strengtheners",
+            "heading": "Cuticle oils and dry oils",
             "link_label": "Shop",
             "art": "dropper",
             "shade_1": "#ede6dd",
@@ -151,8 +151,8 @@
           "type": "item",
           "settings": {
             "icon": "leaf",
-            "title": "Vegan",
-            "text": "No animal-derived ingredients"
+            "title": "Professional brands",
+            "text": "DARK, Patrisa Nail and STALEKS"
           }
         },
         "benefit-2": {
@@ -160,23 +160,23 @@
           "settings": {
             "icon": "clock",
             "title": "Long-wear",
-            "text": "Up to 21 days of colour"
+            "text": "Up to 4 weeks of colour"
           }
         },
         "benefit-3": {
           "type": "item",
           "settings": {
             "icon": "shield",
-            "title": "HEMA-free",
-            "text": "Kinder to nails and skin"
+            "title": "Tracked delivery",
+            "text": "Royal Mail Tracked 24 and 48"
           }
         },
         "benefit-4": {
           "type": "item",
           "settings": {
             "icon": "spark",
-            "title": "Salon-quality",
-            "text": "Professional formulas at home"
+            "title": "Free UK delivery",
+            "text": "On orders over £150"
           }
         }
       },
@@ -197,9 +197,9 @@
       "type": "nl-brand-statement",
       "settings": {
         "label": "Our approach",
-        "heading": "Salon results, at your own pace",
-        "text": "<p>We make professional gel systems for the kitchen table as much as the salon chair. Considered formulas, honest shades and step-by-step guidance, so a manicure that lasts three weeks feels calm rather than complicated.</p>",
-        "link_label": "Read our story",
+        "heading": "Professional nail supplies, made simple",
+        "text": "<p>Nailogy brings trusted professional brands to nail technicians and nail lovers across the UK: DARK gel systems, Patrisa Nail gels and STALEKS instruments. Clear product information, honest advice and tracked delivery from the UK, so you can focus on the nails.</p>",
+        "link_label": "About Nailogy",
         "link": "shopify://pages/about",
         "alignment": "center"
       }
@@ -227,13 +227,13 @@
           "type": "panel",
           "settings": {
             "product": "",
-            "link": "shopify://collections/builder-gel",
-            "label": "Bundle · Save 15%",
+            "link": "shopify://collections/builder-gel-in-a-bottle",
+            "label": "Builder gel",
             "show_marker": true,
             "marker_color": "#b9704d",
-            "heading": "The Builder Gel Kit",
-            "text": "Base, builder and top coat in one box. Everything for a strong, natural-looking set.",
-            "link_label": "Shop now",
+            "heading": "DARK Smart Builder Gel",
+            "text": "Builder gel in a bottle for strengthening, extensions and repairs. Acid-free, with no sticky layer.",
+            "link_label": "Shop builder gel",
             "art": "bottles",
             "art_background": "#d8c0a3",
             "shade_1": "#ede6dd",
@@ -246,13 +246,13 @@
           "type": "panel",
           "settings": {
             "product": "",
-            "link": "shopify://collections/salon-essentials",
-            "label": "Gift set",
+            "link": "shopify://collections/instruments",
+            "label": "Instruments",
             "show_marker": false,
             "marker_color": "#b9704d",
-            "heading": "The Discovery Set",
-            "text": "Four mini gel colours to try before you choose a favourite. Beautifully boxed.",
-            "link_label": "Shop now",
+            "heading": "STALEKS EXPERT e-file bits",
+            "text": "Diamond and carbide bits for cuticle work, gel removal and pedicure. Sterilisable and corrosion resistant.",
+            "link_label": "Shop instruments",
             "art": "swatches",
             "art_background": "#d8c0a3",
             "shade_1": "#5e3b2e",
@@ -269,9 +269,9 @@
             "label": "Care",
             "show_marker": true,
             "marker_color": "#8a8666",
-            "heading": "The Care Ritual",
-            "text": "Cuticle oil, nourishing serum and a gentle remover for the days between sets.",
-            "link_label": "Shop now",
+            "heading": "Cuticle care",
+            "text": "Cuticle oils and dry oils to keep skin soft and nails healthy between sets.",
+            "link_label": "Shop cuticle oils",
             "art": "image",
             "art_background": "#d8c0a3",
             "shade_1": "#ede6dd",
@@ -461,7 +461,7 @@
           "settings": {
             "color": "#e4dccb",
             "link": "",
-            "sample": "nl-demo-hand",
+            "sample": "none",
             "sample_position": "50% 50%"
           }
         },
@@ -488,7 +488,7 @@
           "settings": {
             "color": "#e4dccb",
             "link": "",
-            "sample": "nl-demo-fur",
+            "sample": "none",
             "sample_position": "50% 50%"
           }
         },
@@ -497,7 +497,7 @@
           "settings": {
             "color": "#e4dccb",
             "link": "",
-            "sample": "nl-demo-plum",
+            "sample": "none",
             "sample_position": "50% 50%"
           }
         },
@@ -533,23 +533,23 @@
           "settings": {
             "icon": "truck",
             "title": "Free UK delivery",
-            "text": "On orders over £40"
+            "text": "On orders over £150"
           }
         },
         "service-2": {
           "type": "item",
           "settings": {
             "icon": "box",
-            "title": "Fast dispatch",
-            "text": "Order by 2pm, sent same day"
+            "title": "UK dispatch",
+            "text": "Within 3–5 working days"
           }
         },
         "service-3": {
           "type": "item",
           "settings": {
             "icon": "return",
-            "title": "Easy returns",
-            "text": "30 days on unopened items"
+            "title": "14-day returns",
+            "text": "On eligible unopened items"
           }
         },
         "service-4": {
