@@ -132,8 +132,8 @@
           "type": "item",
           "settings": {
             "icon": "return",
-            "title": "Easy returns",
-            "text": "30 days on unopened items"
+            "title": "14-day returns",
+            "text": "On eligible unopened items"
           }
         },
         "s4": {
