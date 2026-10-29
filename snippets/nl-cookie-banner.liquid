@@ -71,10 +71,8 @@
       }
     });
 
-    if (stored()) return;
-    withPrivacyApi(function (api) {
-      var decided = api && typeof api.getTrackingConsent === 'function' && api.getTrackingConsent() !== 'no_interaction';
-      if (!decided) show();
-    });
+    // Show until the visitor chooses on this banner. Shopify reports consent as already given
+    // when its own banner isn't enabled for the region, so its status can't decide this.
+    if (!stored()) show();
   })();
 </script>
