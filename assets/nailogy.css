@@ -2775,3 +2775,165 @@ body.nl .card__heading {
   text-decoration: underline;
   text-underline-offset: 4px;
 }
+
+/* ---------- Cookie banner ---------- */
+
+.nl-cookie {
+  position: fixed;
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
+  z-index: 1000;
+  max-width: 960px;
+  margin: 0 auto;
+  background: var(--nl-parchment);
+  color: var(--nl-walnut);
+  border: 1px solid rgba(90, 58, 42, 0.18);
+  border-radius: 4px;
+  box-shadow: 0 8px 32px rgba(43, 33, 28, 0.18);
+}
+
+.nl-cookie[hidden] {
+  display: none;
+}
+
+.nl-cookie__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 24px;
+  padding: 20px 24px;
+}
+
+.nl-cookie__text {
+  flex: 1 1 420px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.nl-cookie__text p {
+  margin: 0;
+}
+
+.nl-cookie__title {
+  font-weight: 700;
+  margin-bottom: 4px !important;
+}
+
+.nl-cookie__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.nl-cookie__btn {
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 12px 20px;
+  border: 1px solid var(--nl-walnut);
+  border-radius: 2px;
+  background: var(--nl-walnut);
+  color: var(--nl-on-dark);
+  cursor: pointer;
+}
+
+.nl-cookie__btn--ghost {
+  background: transparent;
+  color: var(--nl-walnut);
+}
+
+@media (max-width: 600px) {
+  .nl-cookie__actions,
+  .nl-cookie__btn {
+    width: 100%;
+  }
+}
+
+/* ---------- FAQ accordion (page content) ---------- */
+
+.rte details.nl-faq {
+  border-bottom: 1px solid rgba(90, 58, 42, 0.18);
+  padding: 0;
+}
+
+.rte details.nl-faq > summary {
+  list-style: none;
+  cursor: pointer;
+  position: relative;
+  padding: 18px 40px 18px 0;
+  font-weight: 600;
+}
+
+.rte details.nl-faq > summary::-webkit-details-marker {
+  display: none;
+}
+
+.rte details.nl-faq > summary::after {
+  content: '+';
+  position: absolute;
+  right: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 22px;
+  font-weight: 400;
+}
+
+.rte details.nl-faq[open] > summary::after {
+  content: '\2212';
+}
+
+.rte details.nl-faq > div {
+  padding: 0 0 18px;
+}
+
+.rte details.nl-faq > div > *:last-child {
+  margin-bottom: 0;
+}
+
+.rte h2.nl-faq-group {
+  margin-top: 40px;
+}
+
+/* ---------- Colour filter chips (collection pages) ---------- */
+
+.nl-colours {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 24px;
+}
+
+.nl-colours__label {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-right: 8px;
+}
+
+.nl-colours a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border: 1px solid rgba(90, 58, 42, 0.25);
+  border-radius: 999px;
+  font-size: 14px;
+  text-decoration: none;
+  color: var(--nl-walnut);
+}
+
+.nl-colours a[aria-current='true'] {
+  background: var(--nl-walnut);
+  border-color: var(--nl-walnut);
+  color: var(--nl-on-dark);
+}
+
+.nl-colours__dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+}
