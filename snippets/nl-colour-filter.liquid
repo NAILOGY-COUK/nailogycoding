@@ -1,0 +1,67 @@
+{%- comment -%}
+  Colour filter chips for collection pages. Products are tagged "Colour: <family>"
+  (e.g. "Colour: Nude"); each chip links to the collection filtered by that tag.
+  Renders nothing when the collection has no colour tags.
+{%- endcomment -%}
+{%- liquid
+  assign colour_tags = ''
+  for tag in collection.all_tags
+    if tag contains 'Colour: '
+      assign colour_tags = colour_tags | append: tag | append: '||'
+    endif
+  endfor
+-%}
+{%- if colour_tags != blank -%}
+  {%- assign colour_tags = colour_tags | split: '||' -%}
+  <nav class="nl-colours page-width" aria-label="Filter by colour">
+    <span class="nl-colours__label">Colour</span>
+    <a href="{{ collection.url }}"{% if current_tags == blank %} aria-current="true"{% endif %}>All</a>
+    {%- for tag in colour_tags -%}
+      {%- liquid
+        assign name = tag | remove_first: 'Colour: '
+        case name
+          when 'Nude' 
+            assign dot = '#d9b8a0'
+          when 'Pink'
+            assign dot = '#e8a3b5'
+          when 'Red'
+            assign dot = '#b3202f'
+          when 'Burgundy'
+            assign dot = '#6d1a2a'
+          when 'Brown'
+            assign dot = '#7a4b33'
+          when 'Beige'
+            assign dot = '#cdb08f'
+          when 'Purple'
+            assign dot = '#6c3f7d'
+          when 'Blue'
+            assign dot = '#3b5aa8'
+          when 'Green'
+            assign dot = '#4f7a52'
+          when 'Grey'
+            assign dot = '#8d8a88'
+          when 'Black'
+            assign dot = '#1b1716'
+          when 'White'
+            assign dot = '#f6f3ee'
+          when 'Orange'
+            assign dot = '#e07a3c'
+          when 'Yellow'
+            assign dot = '#e9c64a'
+          when 'Glitter'
+            assign dot = 'linear-gradient(135deg, #e9d9a8, #c9c3d6)'
+          else
+            assign dot = '#cccccc'
+        endcase
+        assign active = false
+        if current_tags contains tag
+          assign active = true
+        endif
+      -%}
+      <a href="{{ collection.url }}/{{ tag | handleize }}"{% if active %} aria-current="true"{% endif %}>
+        <span class="nl-colours__dot" style="background: {{ dot }};" aria-hidden="true"></span>
+        {{- name | escape -}}
+      </a>
+    {%- endfor -%}
+  </nav>
+{%- endif -%}

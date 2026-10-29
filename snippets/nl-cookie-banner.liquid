@@ -1,0 +1,80 @@
+{%- comment -%}
+  Cookie consent banner (UK GDPR / PECR).
+  Records the visitor's choice through Shopify's Customer Privacy API, so analytics and
+  marketing pixels only run after consent. Shown until the visitor accepts or rejects;
+  any element with [data-nl-cookie-open] reopens it (footer "Cookie settings" link).
+{%- endcomment -%}
+<div class="nl-cookie" id="nl-cookie" role="dialog" aria-modal="false" aria-labelledby="nl-cookie-title" hidden>
+  <div class="nl-cookie__inner">
+    <div class="nl-cookie__text">
+      <p class="nl-cookie__title" id="nl-cookie-title">We use cookies</p>
+      <p>
+        We use essential cookies to make our shop work. With your permission, we'd also like to use analytics and
+        marketing cookies to understand how you use our site and show you relevant ads.
+        <a href="{{ shop.privacy_policy.url | default: '/policies/privacy-policy' }}">Read our privacy policy</a>.
+      </p>
+    </div>
+    <div class="nl-cookie__actions">
+      <button type="button" class="nl-cookie__btn nl-cookie__btn--ghost" data-nl-cookie="reject">Reject non-essential</button>
+      <button type="button" class="nl-cookie__btn" data-nl-cookie="accept">Accept all</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var banner = document.getElementById('nl-cookie');
+    if (!banner) return;
+    var KEY = 'nl_cookie_choice';
+
+    function stored() {
+      try { return window.localStorage.getItem(KEY); } catch (e) { return null; }
+    }
+    function remember(value) {
+      try { window.localStorage.setItem(KEY, value); } catch (e) {}
+    }
+    function show() { banner.hidden = false; }
+    function hide() { banner.hidden = true; }
+
+    function withPrivacyApi(callback) {
+      if (window.Shopify && window.Shopify.customerPrivacy) return callback(window.Shopify.customerPrivacy);
+      if (window.Shopify && typeof window.Shopify.loadFeatures === 'function') {
+        window.Shopify.loadFeatures([{ name: 'consent-tracking-api', version: '0.1' }], function (error) {
+          callback(error ? null : window.Shopify.customerPrivacy);
+        });
+      } else {
+        callback(null);
+      }
+    }
+
+    function choose(accepted) {
+      remember(accepted ? 'accepted' : 'rejected');
+      hide();
+      withPrivacyApi(function (api) {
+        if (!api) return;
+        api.setTrackingConsent(
+          { analytics: accepted, marketing: accepted, preferences: accepted, sale_of_data: accepted },
+          function () {}
+        );
+      });
+    }
+
+    banner.addEventListener('click', function (event) {
+      var button = event.target.closest('[data-nl-cookie]');
+      if (button) choose(button.getAttribute('data-nl-cookie') === 'accept');
+    });
+
+    document.addEventListener('click', function (event) {
+      if (event.target.closest('[data-nl-cookie-open]')) {
+        event.preventDefault();
+        show();
+      }
+    });
+
+    if (stored()) return;
+    withPrivacyApi(function (api) {
+      var decided = api && typeof api.getTrackingConsent === 'function' && api.getTrackingConsent() !== 'no_interaction';
+      if (!decided) show();
+    });
+  })();
+</script>

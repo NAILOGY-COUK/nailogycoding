@@ -384,14 +384,20 @@
       tabindex="-1"
       data-template="{{ template.name }}"
     >
-      {%- if request.page_type == 'policy' -%}
-        {%- comment -%} Shopify-generated policies still carry the old contact details; correct them here. {%- endcomment -%}
+      {%- if request.page_type == 'policy' and request.path contains '/policies/privacy-policy' -%}
+        {%- comment -%} Shopify's generic privacy template has no cookies or ICO section; show ours instead. {%- endcomment -%}
+        {% render 'nl-privacy-policy' %}
+      {%- elsif request.page_type == 'policy' -%}
+        {%- comment -%} Correct outdated details in the Shopify-stored policies, which the API can't edit. {%- endcomment -%}
         {{
           content_for_layout
           | replace: ' or contact us at Image Court, 34, Romford RM7 0FJ, United Kingdom', ''
           | replace: 'please call  or email', 'please email'
           | replace: 'please call or email', 'please email'
           | replace: 'nailogycouk@gmail.com', 'info@nailogy.co.uk'
+          | replace: 'Standard Delivery: Estimated 2–4 working days after dispatch.', 'Standard Delivery (Royal Mail Tracked 48): £3.99, estimated 2–3 working days after dispatch.'
+          | replace: 'Express Delivery: Available for eligible orders, with charges and estimated delivery times displayed at checkout.', 'Express Delivery (Royal Mail Tracked 24): £7.99, estimated 1–2 working days after dispatch.'
+          | replace: 'FREE Standard Delivery: On eligible UK orders over 150£', 'FREE Standard Delivery: on UK orders over £150'
         }}
       {%- else -%}
         {{ content_for_layout }}
@@ -457,5 +463,6 @@
     {%- if settings.cart_type == 'drawer' -%}
       <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
+    {% render 'nl-cookie-banner' %}
   </body>
 </html>
