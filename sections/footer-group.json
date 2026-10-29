@@ -25,7 +25,7 @@
           "type": "menu",
           "settings": {
             "heading": "Help",
-            "menu": ""
+            "menu": "help"
           }
         },
         "menu-3": {

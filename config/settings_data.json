@@ -200,7 +200,8 @@
           }
         }
       },
-      "nl_free_delivery_threshold": 150
+      "nl_free_delivery_threshold": 150,
+      "nl_basket_payment_note": ""
     }
   }
 }
