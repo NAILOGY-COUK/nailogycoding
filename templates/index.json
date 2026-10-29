@@ -303,7 +303,7 @@
             "title": "Prep",
             "text": "Push back, buff and cleanse for a clean surface.",
             "link_label": "Shop prep",
-            "link": ""
+            "link": "shopify://collections/prep-liquids"
           }
         },
         "step-2": {
@@ -314,7 +314,7 @@
             "title": "Base",
             "text": "A thin rubber base for grip and a smooth finish.",
             "link_label": "Shop base coats",
-            "link": ""
+            "link": "shopify://collections/base-top-coat"
           }
         },
         "step-3": {
@@ -325,7 +325,7 @@
             "title": "Colour",
             "text": "Two slim coats of gel colour, cured between each.",
             "link_label": "Shop gel polish",
-            "link": ""
+            "link": "shopify://collections/gel-polish"
           }
         },
         "step-4": {
@@ -336,7 +336,7 @@
             "title": "Top coat & care",
             "text": "Seal with top coat, then oil daily.",
             "link_label": "Shop top coats",
-            "link": ""
+            "link": "shopify://collections/top-coat"
           }
         }
       },
@@ -522,7 +522,7 @@
       "settings": {
         "heading": "On the gram",
         "handle": "@nailogy.shop",
-        "link": ""
+        "link": "https://www.instagram.com/nailogy.shop"
       }
     },
     "service": {
@@ -557,7 +557,7 @@
           "settings": {
             "icon": "lock",
             "title": "Secure payment",
-            "text": "Card, Apple Pay, PayPal, Klarna"
+            "text": "All major cards, secure checkout"
           }
         }
       },

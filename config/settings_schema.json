@@ -1675,7 +1675,7 @@
         "type": "text",
         "id": "nl_basket_payment_note",
         "label": "Payment note under checkout button",
-        "default": "Or 3 interest-free payments with Klarna or Clearpay"
+        "default": ""
       }
     ]
   },
