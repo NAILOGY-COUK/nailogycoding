@@ -756,9 +756,8 @@
         endif
       -%}
 
-      <script type="application/ld+json">
-        {{ product | structured_data }}
-      </script>
+      {%- comment -%} Adds shipping and return policy details that Shopify's default structured data omits. {%- endcomment -%}
+      {% render 'nl-product-schema', product: product %}
     </div>
   </product-component>
 </product-info>
