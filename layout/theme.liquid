@@ -10,7 +10,10 @@
 
     {%- if settings.favicon != blank -%}
       <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+    {%- else -%}
+      <link rel="icon" type="image/png" sizes="96x96" href="{{ 'nl-favicon.png' | asset_url }}">
     {%- endif -%}
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ 'nl-apple-touch-icon.png' | asset_url }}">
 
     {%- unless settings.nl_use_brand_fonts or settings.type_header_font.system? and settings.type_body_font.system? -%}
       <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
