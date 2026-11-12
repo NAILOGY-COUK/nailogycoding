@@ -2943,3 +2943,68 @@ body.nl .card__heading {
   border-radius: 50%;
   border: 1px solid rgba(0, 0, 0, 0.12);
 }
+
+/* ---------- Shop by category ---------- */
+
+.nl-cats__rail {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 8px;
+  grid-auto-columns: 42%;
+}
+
+.nl-cats__tile {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  color: var(--nl-walnut);
+  text-decoration: none;
+}
+
+.nl-cats__media {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  margin-bottom: 8px;
+  background: var(--nl-bone);
+  border-radius: var(--nl-radius);
+}
+
+.nl-cats__media .nl-art__img {
+  transition: transform 0.6s ease;
+}
+
+.nl-cats__tile:hover .nl-art__img {
+  transform: scale(1.04);
+}
+
+.nl-cats__name {
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1.3;
+}
+
+.nl-cats__tile:hover .nl-cats__name {
+  text-decoration: underline;
+  text-decoration-color: var(--nl-cinnamon);
+  text-decoration-thickness: 2px;
+}
+
+.nl-cats__count {
+  font-size: 13px;
+  opacity: 0.75;
+}
+
+@media screen and (min-width: 900px) {
+  .nl-cats__rail {
+    grid-auto-columns: calc((100% - 64px) / 5);
+    gap: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nl-cats__media .nl-art__img {
+    transition: none;
+  }
+}

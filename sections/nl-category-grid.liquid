@@ -1,0 +1,89 @@
+{%- comment -%}
+  Shop by category: a scrolling row of category tiles. Each tile uses the picked image,
+  a theme photo file, or the collection's own image (falls back to its first product photo).
+{%- endcomment -%}
+{%- assign heading_id = 'NlCatHeading-' | append: section.id -%}
+<div
+  class="nl-s nl-wrap nl-cats"
+  style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="nl-head-row">
+    <div class="nl-head-row__titles">
+      {%- if section.settings.label != blank -%}
+        <span class="nl-lbl">{{ section.settings.label | escape }}</span>
+      {%- endif -%}
+      <h2 id="{{ heading_id }}" class="nl-h nl-h--section">{{ section.settings.heading | escape }}</h2>
+    </div>
+    {%- if section.settings.view_all_label != blank and section.settings.view_all_link != blank -%}
+      <a class="nl-tl" href="{{ section.settings.view_all_link }}">{{ section.settings.view_all_label | escape }}</a>
+    {%- endif -%}
+  </div>
+
+  <ul class="nl-rail nl-cats__rail" role="list" aria-labelledby="{{ heading_id }}" tabindex="0">
+    {%- for block in section.blocks -%}
+      {%- liquid
+        assign c = block.settings.collection
+        assign title = block.settings.title | default: c.title
+        assign tile_image = block.settings.image | default: c.featured_image
+      -%}
+      {%- if c == blank and title == blank -%}{%- continue -%}{%- endif -%}
+      <li class="nl-cats__item" {{ block.shopify_attributes }}>
+        <a class="nl-cats__tile" href="{{ c.url | default: '#' }}">
+          <span class="nl-cats__media">
+            {%- if block.settings.image != blank or block.settings.asset_image == blank -%}
+              {%- if tile_image != blank -%}
+                {{
+                  tile_image
+                  | image_url: width: 600
+                  | image_tag:
+                    class: 'nl-art__img',
+                    widths: '200, 300, 400, 600',
+                    sizes: '(min-width: 900px) 20vw, 42vw',
+                    loading: 'lazy',
+                    alt: ''
+                }}
+              {%- endif -%}
+            {%- else -%}
+              {%- render 'nl-asset-img', file: block.settings.asset_image, position: block.settings.asset_position -%}
+            {%- endif -%}
+          </span>
+          <span class="nl-cats__name">{{ title | escape }}</span>
+          {%- if section.settings.show_count and c.products_count > 0 -%}
+            <span class="nl-cats__count">{{ c.products_count }} products</span>
+          {%- endif -%}
+        </a>
+      </li>
+    {%- endfor -%}
+  </ul>
+</div>
+
+{% schema %}
+{
+  "name": "NL Shop by category",
+  "tag": "section",
+  "class": "nl-section",
+  "settings": [
+    { "type": "text", "id": "label", "label": "Label", "default": "Categories" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Shop by category" },
+    { "type": "text", "id": "view_all_label", "label": "Link label", "default": "Shop all" },
+    { "type": "url", "id": "view_all_link", "label": "Link" },
+    { "type": "checkbox", "id": "show_count", "label": "Show number of products", "default": true },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 120, "step": 8, "unit": "px", "label": "Top spacing", "default": 56 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 120, "step": 8, "unit": "px", "label": "Bottom spacing", "default": 56 }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        { "type": "collection", "id": "collection", "label": "Collection" },
+        { "type": "text", "id": "title", "label": "Title", "info": "Leave empty to use the collection name" },
+        { "type": "image_picker", "id": "image", "label": "Image", "info": "Leave empty to use the collection image" },
+        { "type": "text", "id": "asset_image", "label": "Theme photo file", "info": "Used when no image is picked above" },
+        { "type": "text", "id": "asset_position", "label": "Theme photo position", "default": "50% 50%" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "NL Shop by category" }]
+}
+{% endschema %}
