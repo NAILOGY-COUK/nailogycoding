@@ -93,6 +93,8 @@
                   fetchpriority: priority,
                   style: focal_style
               }}
+            {%- elsif block.settings.asset_image != blank -%}
+              {%- render 'nl-asset-img', file: block.settings.asset_image, position: block.settings.asset_position, loading: loading, priority: priority, alt: block.settings.image_alt -%}
             {%- else -%}
               <img
                 class="nl-art__img"
@@ -241,6 +243,18 @@
           "id": "image",
           "label": "Image",
           "info": "Set a focal point on the image to control cropping."
+        },
+        {
+          "type": "text",
+          "id": "asset_image",
+          "label": "Theme photo file",
+          "info": "Used when no image is picked above, e.g. nl-photo-gel-nude.webp"
+        },
+        {
+          "type": "text",
+          "id": "asset_position",
+          "label": "Theme photo position",
+          "default": "50% 50%"
         },
         {
           "type": "text",

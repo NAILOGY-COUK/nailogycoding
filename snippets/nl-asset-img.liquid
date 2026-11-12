@@ -1,0 +1,14 @@
+{%- comment -%}
+  Renders a photo stored in the theme's assets folder (used when no image is picked
+  in the theme editor). Accepts: file, position (object-position), loading, priority, alt.
+{%- endcomment -%}
+<img
+  class="nl-art__img"
+  src="{{ file | asset_url }}"
+  alt="{{ alt | default: '' | escape }}"
+  width="1200"
+  height="1500"
+  loading="{{ loading | default: 'lazy' }}"
+  {% if priority %}fetchpriority="{{ priority }}"{% endif %}
+  style="object-position: {{ position | default: '50% 50%' }};"
+>

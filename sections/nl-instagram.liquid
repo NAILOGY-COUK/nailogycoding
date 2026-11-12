@@ -38,6 +38,8 @@
                   loading: 'lazy',
                   alt: ''
               }}
+            {%- elsif block.settings.asset_image != blank -%}
+              {%- render 'nl-asset-img', file: block.settings.asset_image, position: block.settings.asset_position -%}
             {%- elsif block.settings.sample != 'none' -%}
               {%- liquid
                 if block.settings.sample == 'nl-demo-hand' or block.settings.sample == 'nl-demo-pink'
@@ -106,6 +108,18 @@
           "type": "image_picker",
           "id": "image",
           "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "asset_image",
+          "label": "Theme photo file",
+          "info": "Used when no image is picked above, e.g. nl-photo-gel-nude.webp"
+        },
+        {
+          "type": "text",
+          "id": "asset_position",
+          "label": "Theme photo position",
+          "default": "50% 50%"
         },
         {
           "type": "color",
