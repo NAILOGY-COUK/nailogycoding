@@ -22,11 +22,13 @@
             "button_label": "Shop now",
             "button_link": "shopify://collections/gel-polish",
             "art": "image",
-            "image_alt": "Hand resting on white linen, nails in a soft nude gel",
+            "image_alt": "Nude gel polish texture",
             "shade_1": "#ede6dd",
             "shade_2": "#d8c0a3",
             "shade_3": "#b98680",
-            "shade_4": "#1c1716"
+            "shade_4": "#1c1716",
+            "asset_image": "nl-photo-gel-nude.webp",
+            "asset_position": "50% 50%"
           }
         },
         "slide-2": {
@@ -38,12 +40,14 @@
             "text": "DARK Smart Builder Gel strengthens natural nails, levels itself and leaves no sticky layer.",
             "button_label": "Shop now",
             "button_link": "shopify://collections/builder-gel-in-a-bottle",
-            "art": "bottles",
-            "image_alt": "Hand resting on white linen, nails in a soft nude gel",
+            "art": "image",
+            "image_alt": "Pink builder gel texture",
             "shade_1": "#ede6dd",
             "shade_2": "#d8c0a3",
             "shade_3": "#b98680",
-            "shade_4": "#1c1716"
+            "shade_4": "#1c1716",
+            "asset_image": "nl-photo-gel-pink.webp",
+            "asset_position": "50% 50%"
           }
         },
         "slide-3": {
@@ -55,16 +59,38 @@
             "text": "STALEKS instruments, e-file bits, nitrile gloves, pedicure discs and more, dispatched from the UK.",
             "button_label": "Shop now",
             "button_link": "shopify://collections/salon-essentials",
-            "art": "swatches",
-            "image_alt": "Hand resting on white linen, nails in a soft nude gel",
+            "art": "image",
+            "image_alt": "STALEKS diamond e-file bits on velvet",
             "shade_1": "#5e3b2e",
             "shade_2": "#b98680",
             "shade_3": "#ede6dd",
+            "shade_4": "#1c1716",
+            "asset_image": "nl-photo-staleks-bits.webp",
+            "asset_position": "78% 55%"
+          }
+        },
+        "slide-brushes": {
+          "type": "slide",
+          "settings": {
+            "label": "Nail brushes",
+            "marker_color": "#b9704d",
+            "heading": "Precision in every stroke",
+            "text": "Gel, liner and nail art brushes from STALEKS and Roubloff, with fine tips that keep their shape set after set.",
+            "button_label": "Shop brushes",
+            "button_link": "shopify://collections/nail-brushes",
+            "art": "image",
+            "asset_image": "nl-photo-staleks-brushes.webp",
+            "asset_position": "80% 60%",
+            "image_alt": "STALEKS gel and liner brushes on lilac velvet",
+            "shade_1": "#ede6dd",
+            "shade_2": "#d8c0a3",
+            "shade_3": "#b98680",
             "shade_4": "#1c1716"
           }
         }
       },
       "block_order": [
+        "slide-brushes",
         "slide-1",
         "slide-2",
         "slide-3"
@@ -108,7 +134,7 @@
             "heading": "Cuticle oils and dry oils",
             "image": "shopify://shop_images/c973f8b597e3e5cc3683bb8cd950d5a7.webp",
             "link_label": "Shop",
-            "art": "dropper",
+            "art": "image",
             "shade_1": "#ede6dd",
             "shade_2": "#1c1716",
             "shade_3": "#b98680",
@@ -235,31 +261,35 @@
             "heading": "DARK Smart Builder Gel",
             "text": "Builder gel in a bottle for strengthening, extensions and repairs. Acid-free, with no sticky layer.",
             "link_label": "Shop builder gel",
-            "art": "bottles",
+            "art": "image",
             "art_background": "#d8c0a3",
             "shade_1": "#ede6dd",
             "shade_2": "#b98680",
             "shade_3": "#f7f4ee",
-            "shade_4": "#1c1716"
+            "shade_4": "#1c1716",
+            "asset_image": "nl-photo-gel-rose.webp",
+            "asset_position": "50% 50%"
           }
         },
         "panel-2": {
           "type": "panel",
           "settings": {
             "product": "",
-            "link": "shopify://collections/instruments",
-            "label": "Instruments",
-            "show_marker": false,
+            "link": "shopify://collections/nail-brushes",
+            "label": "Nail brushes",
+            "show_marker": true,
             "marker_color": "#b9704d",
-            "heading": "STALEKS EXPERT e-file bits",
-            "text": "Diamond and carbide bits for cuticle work, gel removal and pedicure. Sterilisable and corrosion resistant.",
-            "link_label": "Shop instruments",
-            "art": "swatches",
+            "heading": "Roubloff nail art brushes",
+            "text": "Hand-finished brushes for gel, liners and the finest nail art. Precise tips, comfortable handles, made to last.",
+            "link_label": "Shop brushes",
+            "art": "image",
             "art_background": "#d8c0a3",
             "shade_1": "#5e3b2e",
             "shade_2": "#b98680",
             "shade_3": "#c08a6b",
-            "shade_4": "#1c1716"
+            "shade_4": "#1c1716",
+            "asset_image": "nl-photo-brushes-fan.webp",
+            "asset_position": "50% 50%"
           }
         },
         "panel-3": {
@@ -463,7 +493,9 @@
             "color": "#e4dccb",
             "link": "",
             "sample": "none",
-            "sample_position": "50% 50%"
+            "sample_position": "50% 50%",
+            "asset_image": "nl-photo-brushes-stones.webp",
+            "asset_position": "50% 50%"
           }
         },
         "ig-2": {
@@ -472,7 +504,9 @@
             "color": "#b98680",
             "link": "",
             "sample": "none",
-            "sample_position": "50% 50%"
+            "sample_position": "50% 50%",
+            "asset_image": "nl-photo-gel-peach.webp",
+            "asset_position": "50% 50%"
           }
         },
         "ig-3": {
@@ -481,7 +515,9 @@
             "color": "#5e3b2e",
             "link": "",
             "sample": "none",
-            "sample_position": "50% 50%"
+            "sample_position": "50% 50%",
+            "asset_image": "nl-photo-staleks-scissors.webp",
+            "asset_position": "50% 60%"
           }
         },
         "ig-4": {
@@ -490,7 +526,9 @@
             "color": "#e4dccb",
             "link": "",
             "sample": "none",
-            "sample_position": "50% 50%"
+            "sample_position": "50% 50%",
+            "asset_image": "nl-photo-brushes-tubes.webp",
+            "asset_position": "50% 50%"
           }
         },
         "ig-5": {
@@ -499,7 +537,9 @@
             "color": "#e4dccb",
             "link": "",
             "sample": "none",
-            "sample_position": "50% 50%"
+            "sample_position": "50% 50%",
+            "asset_image": "nl-photo-patrisa-jar.webp",
+            "asset_position": "50% 50%"
           }
         },
         "ig-6": {
@@ -508,7 +548,9 @@
             "color": "#c08a6b",
             "link": "",
             "sample": "none",
-            "sample_position": "50% 50%"
+            "sample_position": "50% 50%",
+            "asset_image": "nl-photo-brushes-pink.webp",
+            "asset_position": "50% 50%"
           }
         }
       },

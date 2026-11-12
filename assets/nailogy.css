@@ -1092,6 +1092,12 @@ nl-carousel {
   scroll-snap-align: start;
 }
 
+/* Keep "Add to basket" buttons on one line across cards, whatever the title length. */
+.nl-rail > .nl-card .nl-card__info,
+.product-grid .nl-card .nl-card__info {
+  flex: 1 0 auto;
+}
+
 .nl-card {
   display: flex;
   flex-direction: column;

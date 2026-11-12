@@ -40,7 +40,19 @@
               {%- liquid
                 assign panel_image = block.settings.image | default: panel_product.featured_image
               -%}
-              {%- if panel_image != blank -%}
+              {%- if block.settings.video != blank -%}
+                {{
+                  block.settings.video
+                  | video_tag:
+                    autoplay: true,
+                    loop: true,
+                    muted: true,
+                    playsinline: true,
+                    controls: false,
+                    class: 'nl-art__img',
+                    image_size: '1200x'
+                }}
+              {%- elsif panel_image != blank -%}
                 {%- assign focal_style = panel_image.presentation.focal_point
                   | default: '50% 50%'
                   | prepend: 'object-position: '
@@ -56,6 +68,8 @@
                     alt: '',
                     style: focal_style
                 }}
+              {%- elsif block.settings.asset_image != blank -%}
+                {%- render 'nl-asset-img', file: block.settings.asset_image, position: block.settings.asset_position -%}
               {%- else -%}
                 <img
                   class="nl-art__img"
@@ -195,6 +209,24 @@
           "type": "image_picker",
           "id": "image",
           "label": "Image"
+        },
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Video",
+          "info": "Plays silently on a loop instead of the image. Upload in Content > Files."
+        },
+        {
+          "type": "text",
+          "id": "asset_image",
+          "label": "Theme photo file",
+          "info": "Used when no image is picked above, e.g. nl-photo-gel-nude.webp"
+        },
+        {
+          "type": "text",
+          "id": "asset_position",
+          "label": "Theme photo position",
+          "default": "50% 50%"
         },
         {
           "type": "color",
