@@ -99,8 +99,8 @@
         "aria_label": "Featured collections",
         "first_heading_h1": true,
         "panel_background": "",
-        "autoplay": false,
-        "autoplay_speed": 6
+        "autoplay": true,
+        "autoplay_speed": 5
       }
     },
     "promo": {
@@ -629,15 +629,131 @@
         "tags": "newsletter",
         "small_print": "Unsubscribe at any time. See our <a href=\"/policies/privacy-policy\">Privacy Policy</a>."
       }
+    },
+    "categories": {
+      "type": "nl-category-grid",
+      "blocks": {
+        "cat-1": {
+          "type": "category",
+          "settings": {
+            "collection": "base-top-coat",
+            "title": ""
+          }
+        },
+        "cat-2": {
+          "type": "category",
+          "settings": {
+            "collection": "gel-system",
+            "title": "",
+            "asset_image": "nl-photo-gel-pink.webp",
+            "asset_position": "50% 50%"
+          }
+        },
+        "cat-3": {
+          "type": "category",
+          "settings": {
+            "collection": "polygel-system",
+            "title": ""
+          }
+        },
+        "cat-4": {
+          "type": "category",
+          "settings": {
+            "collection": "gel-polish",
+            "title": "",
+            "asset_image": "nl-photo-gel-nude.webp",
+            "asset_position": "50% 50%"
+          }
+        },
+        "cat-5": {
+          "type": "category",
+          "settings": {
+            "collection": "instruments",
+            "title": "",
+            "asset_image": "nl-photo-staleks-scissors.webp",
+            "asset_position": "50% 50%"
+          }
+        },
+        "cat-6": {
+          "type": "category",
+          "settings": {
+            "collection": "liquids",
+            "title": ""
+          }
+        },
+        "cat-7": {
+          "type": "category",
+          "settings": {
+            "collection": "salon-essentials",
+            "title": "",
+            "asset_image": "nl-photo-staleks-sticks.webp",
+            "asset_position": "50% 50%"
+          }
+        },
+        "cat-8": {
+          "type": "category",
+          "settings": {
+            "collection": "nail-art",
+            "title": "",
+            "asset_image": "nl-photo-brushes-case.webp",
+            "asset_position": "50% 50%"
+          }
+        },
+        "cat-9": {
+          "type": "category",
+          "settings": {
+            "collection": "equipment",
+            "title": ""
+          }
+        }
+      },
+      "block_order": [
+        "cat-1",
+        "cat-2",
+        "cat-3",
+        "cat-4",
+        "cat-5",
+        "cat-6",
+        "cat-7",
+        "cat-8",
+        "cat-9"
+      ],
+      "settings": {
+        "label": "Categories",
+        "heading": "Shop by category",
+        "view_all_label": "Shop all",
+        "view_all_link": "shopify://collections/all",
+        "show_count": true,
+        "padding_top": 56,
+        "padding_bottom": 8
+      }
+    },
+    "brushes": {
+      "type": "nl-product-carousel",
+      "settings": {
+        "label": "Nail brushes",
+        "heading": "Brushes for every technique",
+        "collection": "nail-brushes",
+        "products_to_show": 10,
+        "view_all_label": "View all",
+        "view_all_link": "",
+        "quick_add": true,
+        "show_shade": false,
+        "show_video": true,
+        "padding_top": 0,
+        "padding_bottom": 56
+      }
     }
   },
   "order": [
     "hero",
     "promo",
     "benefits",
+    "categories",
     "statement",
     "bestsellers",
     "panels",
+    "brushes",
     "routine",
     "academy",
     "reviews",
