@@ -289,7 +289,8 @@
             "shade_3": "#c08a6b",
             "shade_4": "#1c1716",
             "asset_image": "nl-photo-brushes-fan.webp",
-            "asset_position": "50% 50%"
+            "asset_position": "50% 50%",
+            "video": "shopify://files/videos/nl-video-brush-love.mp4"
           }
         },
         "panel-3": {
