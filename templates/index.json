@@ -22,31 +22,12 @@
             "button_label": "Shop now",
             "button_link": "shopify://collections/gel-polish",
             "art": "image",
-            "image_alt": "Nude gel polish texture",
+            "image_alt": "Dusty rose gel polish texture",
             "shade_1": "#ede6dd",
             "shade_2": "#d8c0a3",
             "shade_3": "#b98680",
             "shade_4": "#1c1716",
-            "asset_image": "nl-photo-gel-nude.webp",
-            "asset_position": "50% 50%"
-          }
-        },
-        "slide-2": {
-          "type": "slide",
-          "settings": {
-            "label": "Builder Gel in a Bottle",
-            "marker_color": "#b9704d",
-            "heading": "Strength you can brush on",
-            "text": "DARK Smart Builder Gel strengthens natural nails, levels itself and leaves no sticky layer.",
-            "button_label": "Shop now",
-            "button_link": "shopify://collections/builder-gel-in-a-bottle",
-            "art": "image",
-            "image_alt": "Pink builder gel texture",
-            "shade_1": "#ede6dd",
-            "shade_2": "#d8c0a3",
-            "shade_3": "#b98680",
-            "shade_4": "#1c1716",
-            "asset_image": "nl-photo-gel-pink.webp",
+            "asset_image": "nl-photo-gel-rose.webp",
             "asset_position": "50% 50%"
           }
         },
@@ -92,7 +73,6 @@
       "block_order": [
         "slide-brushes",
         "slide-1",
-        "slide-2",
         "slide-3"
       ],
       "settings": {
@@ -267,7 +247,7 @@
             "shade_2": "#b98680",
             "shade_3": "#f7f4ee",
             "shade_4": "#1c1716",
-            "asset_image": "nl-photo-gel-rose.webp",
+            "asset_image": "nl-photo-gel-pink.webp",
             "asset_position": "50% 50%"
           }
         },
@@ -506,7 +486,7 @@
             "link": "",
             "sample": "none",
             "sample_position": "50% 50%",
-            "asset_image": "nl-photo-gel-peach.webp",
+            "asset_image": "nl-photo-brushes-fan.webp",
             "asset_position": "50% 50%"
           }
         },
@@ -644,9 +624,7 @@
           "type": "category",
           "settings": {
             "collection": "gel-system",
-            "title": "",
-            "asset_image": "nl-photo-gel-pink.webp",
-            "asset_position": "50% 50%"
+            "title": ""
           }
         },
         "cat-3": {
@@ -660,9 +638,7 @@
           "type": "category",
           "settings": {
             "collection": "gel-polish",
-            "title": "",
-            "asset_image": "nl-photo-gel-nude.webp",
-            "asset_position": "50% 50%"
+            "title": ""
           }
         },
         "cat-5": {
