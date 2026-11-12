@@ -53,10 +53,10 @@
         "slide-brushes": {
           "type": "slide",
           "settings": {
-            "label": "Nail brushes",
+            "label": "STALEKS brushes",
             "marker_color": "#b9704d",
             "heading": "Precision in every stroke",
-            "text": "Gel, liner and nail art brushes from STALEKS and Roubloff, with fine tips that keep their shape set after set.",
+            "text": "STALEKS EXPERT gel and liner brushes with fine tips that keep their shape set after set.",
             "button_label": "Shop brushes",
             "button_link": "shopify://collections/nail-brushes",
             "art": "image",
@@ -68,9 +68,29 @@
             "shade_3": "#b98680",
             "shade_4": "#1c1716"
           }
+        },
+        "slide-roubloff": {
+          "type": "slide",
+          "settings": {
+            "label": "Roubloff brushes",
+            "marker_color": "#b9704d",
+            "heading": "Roubloff nail art brushes",
+            "text": "Hand-finished oval gel brushes, round detail brushes and ultra-fine liners. The choice of nail artists for clean lines and perfect detail.",
+            "button_label": "Shop Roubloff",
+            "button_link": "shopify://collections/roubloff-brushes",
+            "art": "image",
+            "asset_image": "nl-photo-brushes-fan.webp",
+            "asset_position": "50% 45%",
+            "image_alt": "Roubloff nail brushes fanned out on white rings",
+            "shade_1": "#ede6dd",
+            "shade_2": "#d8c0a3",
+            "shade_3": "#b98680",
+            "shade_4": "#1c1716"
+          }
         }
       },
       "block_order": [
+        "slide-roubloff",
         "slide-brushes",
         "slide-1",
         "slide-3"
@@ -255,13 +275,13 @@
           "type": "panel",
           "settings": {
             "product": "",
-            "link": "shopify://collections/nail-brushes",
+            "link": "shopify://collections/roubloff-brushes",
             "label": "Nail brushes",
             "show_marker": true,
             "marker_color": "#b9704d",
             "heading": "Roubloff nail art brushes",
             "text": "Hand-finished brushes for gel, liners and the finest nail art. Precise tips, comfortable handles, made to last.",
-            "link_label": "Shop brushes",
+            "link_label": "Shop Roubloff",
             "art": "image",
             "art_background": "#d8c0a3",
             "shade_1": "#5e3b2e",
@@ -486,7 +506,7 @@
             "link": "",
             "sample": "none",
             "sample_position": "50% 50%",
-            "asset_image": "nl-photo-brushes-fan.webp",
+            "asset_image": "nl-photo-brushes-case.webp",
             "asset_position": "50% 50%"
           }
         },
@@ -670,9 +690,7 @@
           "type": "category",
           "settings": {
             "collection": "nail-art",
-            "title": "",
-            "asset_image": "nl-photo-brushes-case.webp",
-            "asset_position": "50% 50%"
+            "title": ""
           }
         },
         "cat-9": {
