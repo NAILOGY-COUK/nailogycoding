@@ -41,17 +41,32 @@
                 assign panel_image = block.settings.image | default: panel_product.featured_image
               -%}
               {%- if block.settings.video != blank -%}
-                {{
-                  block.settings.video
-                  | video_tag:
-                    autoplay: true,
-                    loop: true,
-                    muted: true,
-                    playsinline: true,
-                    controls: false,
-                    class: 'nl-art__img',
-                    image_size: '1200x'
-                }}
+                {%- liquid
+                  assign vid = block.settings.video
+                  assign mp4 = vid.sources | where: 'mime_type', 'video/mp4' | sort: 'height' | last
+                -%}
+                <video
+                  class="nl-art__img nl-loop-video"
+                  autoplay
+                  muted
+                  loop
+                  playsinline
+                  preload="metadata"
+                  disablepictureinpicture
+                  {% if vid.preview_image %}poster="{{ vid.preview_image | image_url: width: 1000 }}"{% endif %}
+                  aria-label="{{ vid.alt | escape }}"
+                >
+                  {%- if mp4 -%}<source src="{{ mp4.url }}" type="video/mp4">{%- endif -%}
+                </video>
+                <script>
+                  (function () {
+                    var v = document.currentScript.previousElementSibling;
+                    if (!v || v.tagName !== 'VIDEO') return;
+                    v.muted = true;
+                    v.addEventListener('ended', function () { v.currentTime = 0; v.play(); });
+                    var p = v.play(); if (p && p.catch) p.catch(function () {});
+                  })();
+                </script>
               {%- elsif panel_image != blank -%}
                 {%- assign focal_style = panel_image.presentation.focal_point
                   | default: '50% 50%'
