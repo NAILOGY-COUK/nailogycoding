@@ -4,6 +4,11 @@
   assign og_type = 'website'
   assign og_description = page_description | default: shop.description | default: shop.name
 
+  if request.page_type == 'index'
+    assign og_title = 'Nailogy – Professional Nail Supplies UK'
+    assign og_description = 'Professional nail supplies for UK nail techs and salons: DARK gel polish, builder gel, Roubloff and STALEKS brushes, e-file bits and more. Free UK delivery over £150.'
+  endif
+
   if request.page_type == 'product'
     assign og_type = 'product'
   elsif request.page_type == 'article'
@@ -19,11 +24,22 @@
 <meta property="og:type" content="{{ og_type }}">
 <meta property="og:description" content="{{ og_description | escape }}">
 
-{%- if page_image -%}
+{%- comment -%}
+  Homepage and pages without their own image use the branded share card (1200x630,
+  logo centred so Instagram's square crop still shows it).
+{%- endcomment -%}
+{%- if page_image and request.page_type != 'index' -%}
   <meta property="og:image" content="http:{{ page_image | image_url }}">
   <meta property="og:image:secure_url" content="https:{{ page_image | image_url }}">
   <meta property="og:image:width" content="{{ page_image.width }}">
   <meta property="og:image:height" content="{{ page_image.height }}">
+{%- else -%}
+  {%- assign share_url = 'nl-share.jpg' | asset_url -%}
+  <meta property="og:image" content="https:{{ share_url }}">
+  <meta property="og:image:secure_url" content="https:{{ share_url }}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Nailogy – professional nail supplies">
 {%- endif -%}
 
 {%- if request.page_type == 'product' -%}
