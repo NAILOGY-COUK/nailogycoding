@@ -50,6 +50,7 @@
     function choose(accepted) {
       remember(accepted ? 'accepted' : 'rejected');
       hide();
+      if (accepted && typeof window.nlLoadGoogleTag === 'function') window.nlLoadGoogleTag();
       withPrivacyApi(function (api) {
         if (!api) return;
         api.setTrackingConsent(

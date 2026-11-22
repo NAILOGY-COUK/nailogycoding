@@ -1,0 +1,35 @@
+{%- comment -%}
+  Google Ads tag (AW-18543981893) with Consent Mode v2.
+  The tag only loads after the visitor accepts cookies in the NAILOGY cookie banner
+  (choice stored in localStorage 'nl_cookie_choice'); the banner calls nlLoadGoogleTag() on accept.
+{%- endcomment -%}
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', {
+    ad_storage: 'denied',
+    ad_user_data: 'denied',
+    ad_personalization: 'denied',
+    analytics_storage: 'denied',
+    wait_for_update: 500
+  });
+  window.nlLoadGoogleTag = function () {
+    if (window.nlGoogleTagLoaded) return;
+    window.nlGoogleTagLoaded = true;
+    gtag('consent', 'update', {
+      ad_storage: 'granted',
+      ad_user_data: 'granted',
+      ad_personalization: 'granted',
+      analytics_storage: 'granted'
+    });
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=AW-18543981893';
+    document.head.appendChild(s);
+    gtag('js', new Date());
+    gtag('config', 'AW-18543981893');
+  };
+  try {
+    if (window.localStorage.getItem('nl_cookie_choice') === 'accepted') window.nlLoadGoogleTag();
+  } catch (e) {}
+</script>
