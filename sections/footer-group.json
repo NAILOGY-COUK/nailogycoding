@@ -42,13 +42,15 @@
         "menu-3"
       ],
       "settings": {
+        "use_brand_logo": true,
+        "logo_width": 150,
         "logo_text": "NAILOGY",
         "text": "Professional nail care, made calm. Designed in the UK.",
         "show_social": true,
         "show_payment": true,
         "show_currency": true,
         "copyright_name": "NAILOGY",
-        "copyright_suffix": "Online shop based in Romford, RM7 0FJ, United Kingdom · info@nailogy.co.uk",
+        "copyright_suffix": "Online shop based in Romford, United Kingdom · info@nailogy.co.uk",
         "legal_menu": ""
       }
     }
