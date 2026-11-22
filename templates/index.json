@@ -145,18 +145,20 @@
         "tile-3": {
           "type": "tile",
           "settings": {
-            "link": "",
-            "label": "NAILOGY Academy",
+            "link": "shopify://collections/roubloff-brushes",
+            "label": "Roubloff",
             "show_marker": true,
             "marker_color": "#8a8666",
-            "heading": "Join the Academy",
-            "link_label": "Find out more",
+            "heading": "Roubloff nail art brushes",
+            "link_label": "Shop",
             "art": "image",
             "shade_1": "#5e3b2e",
             "shade_2": "#1c1716",
             "shade_3": "#b98680",
-            "badge": "Coming soon",
-            "badge_color": "#8a8666"
+            "badge": "",
+            "badge_color": "#8a8666",
+            "asset_image": "nl-photo-brushes-stones.webp",
+            "asset_position": "50% 50%"
           }
         }
       },
@@ -432,7 +434,8 @@
         "form_placeholder": "Your email address",
         "form_button": "Get early access",
         "form_success": "You’re on the list. We’ll email you when doors open."
-      }
+      },
+      "disabled": true
     },
     "reviews": {
       "type": "nl-reviews",
