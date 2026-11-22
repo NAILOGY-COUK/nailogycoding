@@ -32,4 +32,21 @@
   try {
     if (window.localStorage.getItem('nl_cookie_choice') === 'accepted') window.nlLoadGoogleTag();
   } catch (e) {}
+
+  // Google Ads conversion: Add to basket (product pages, collection cards, homepage carousels).
+  // Only sent to visitors who accepted cookies.
+  document.addEventListener('DOMContentLoaded', function () {
+    if (typeof subscribe !== 'function' || typeof PUB_SUB_EVENTS === 'undefined') return;
+    subscribe(PUB_SUB_EVENTS.cartUpdate, function (event) {
+      if (!window.nlGoogleTagLoaded || !event || event.source !== 'product-form') return;
+      var item = event.cartData || {};
+      var qty = item.quantity || 1;
+      var linePence = item.final_line_price || (item.final_price || item.price || 0) * qty;
+      gtag('event', 'ads_conversion_Shopping_Cart_1', {
+        value: linePence / 100,
+        currency: 'GBP',
+        items: [{ id: String(item.variant_id || event.productVariantId || ''), quantity: qty }]
+      });
+    });
+  });
 </script>
